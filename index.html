@@ -4,12 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>바이오리듬 보드</title>
+<link rel="icon" type="image/jpeg" sizes="32x32" href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAoHBwgHBgoICAgLCgoLDhgQDg0NDh0VFhEYIx8lJCIfIiEmKzcvJik0KSEiMEExNDk7Pj4+JS5ESUM8SDc9Pjv/2wBDAQoLCw4NDhwQEBw7KCIoOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozv/wAARCAAgACADASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAABAUAAgMG/8QAKRAAAgIBAwQABgMBAAAAAAAAAQIDBBEAITEFEkFREyJCYYGRMkNxgv/EABcBAAMBAAAAAAAAAAAAAAAAAAECAwT/xAAbEQEAAwADAQAAAAAAAAAAAAABAAIREiExUf/aAAwDAQACEQMRAD8A4GhVNl2JcRwxjLuxwFHs6YpepQ/LXqfFA/smYjP/ACOP3ocwO9OpX7vhV3zPYmI2ABwP9POB7I0TWeLqeai1K9aKQEU2yBJ3DjJ5YHg/c7ca31H5MSNtlJb1Sb5Zqojz9cLHb8Hn96XW4jA6kOJIn3VhwRrRKgewK00xSY5LKBkRAcljnbHnV5YYBRkSu088SkOs7KAhPBA8jxsfWnaseteLkzfqKjpMJmRrFdcxvDnZWzlWz4PI0G3VK8cxsVklNg/weXGIvXaB5Hj160NDO9N3R0+JDJsykbMNRqdeU91ex2A/RKDkfkc6BZzCUqZ1Gs9uPqDG01mGCCYBrargSFhyAOWydx43340OepT2IJ5WYx1ziKCBT8ijOdh9hjf2dAinBEe6ewHA+mIHJ/J41Hke1IiInZEmwA4UaLZ9ZQqE/9k=">
+<link rel="apple-touch-icon" href="data:image/jpeg;base64,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">
+<meta name="apple-mobile-web-app-title" content="바이오리듬">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600&display=swap">
 <style>
 /* Layout: chart-recorder paper. One column of stacked sections; today's friction pairs come first, then per-person gauges, a 31-day curve, and a 14-day heat strip. Boldness lives in the Do Hyeon headings and the three-wave trace; the rest stays quiet. */
 :root{
   --bg:#EDF1EE; --grid:#E3E9E5; --panel:#F8FAF8; --fg:#16211D; --muted:#566660; --line:#C5D0CB; --focus:#3F5FD6;
-  --phys:#1F9D6B; --emo:#C2418D; --intel:#3F5FD6;
+  --phys:#1F9D6B; --emo:#C2418D; --intel:#3F5FD6; --nat:#C9620C; --art:#8A53D6; --spi:#0B8FA8;
   --good:#0F6A80; --good-bg:#DCEFF3; --bad:#A9351A; --bad-bg:#F8E1D9; --warn:#8A5A00; --warn-bg:#F6E8C3;
   --on-bad:#FFFFFF; --on-h2:#FFFFFF;
   --h-bad2:#BF3F1F; --h-bad1:#F0B7A3; --h-mid:#E3E9E6; --h-good1:#A6D2DD; --h-good2:#1E7B93;
@@ -22,7 +25,7 @@
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
     --bg:#0E1513; --grid:#141D1A; --panel:#151E1B; --fg:#E4EDE9; --muted:#93A59E; --line:#2C3A35; --focus:#8FA2FF;
-    --phys:#3CCB8D; --emo:#E36FB2; --intel:#7C94F4;
+    --phys:#3CCB8D; --emo:#E36FB2; --intel:#7C94F4; --nat:#F29A4A; --art:#B18AF2; --spi:#3FC3DC;
     --good:#59C0D6; --good-bg:#17323A; --bad:#F07F5F; --bad-bg:#3A211A; --warn:#E5B64A; --warn-bg:#3A2E12;
     --on-bad:#1B0F0B; --on-h2:#0E1513;
     --h-bad2:#D9573A; --h-bad1:#6E3A30; --h-mid:#25312D; --h-good1:#27596A; --h-good2:#3AA3BD;
@@ -33,7 +36,7 @@
 }
 :root[data-theme="dark"]{
   --bg:#0E1513; --grid:#141D1A; --panel:#151E1B; --fg:#E4EDE9; --muted:#93A59E; --line:#2C3A35; --focus:#8FA2FF;
-  --phys:#3CCB8D; --emo:#E36FB2; --intel:#7C94F4;
+  --phys:#3CCB8D; --emo:#E36FB2; --intel:#7C94F4; --nat:#F29A4A; --art:#B18AF2; --spi:#3FC3DC;
   --good:#59C0D6; --good-bg:#17323A; --bad:#F07F5F; --bad-bg:#3A211A; --warn:#E5B64A; --warn-bg:#3A2E12;
   --on-bad:#1B0F0B; --on-h2:#0E1513;
   --h-bad2:#D9573A; --h-bad1:#6E3A30; --h-mid:#25312D; --h-good1:#27596A; --h-good2:#3AA3BD;
@@ -200,6 +203,29 @@ input[type=text],input[type=date],select{font:inherit;font-size:15px;min-height:
 .notes{margin-top:40px;border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font-size:14px}
 .notes summary{cursor:pointer;font-weight:600;color:var(--fg)}
 .notes div{display:grid;gap:8px;margin-top:10px;max-width:66ch}
+.brand{display:flex;align-items:center;gap:14px}
+.brand img{width:48px;height:48px;border-radius:11px;flex:none;display:block}
+.tn{stroke:var(--nat)} .ta{stroke:var(--art)} .ts{stroke:var(--spi)}
+.trace .tn,.trace .ta,.trace .ts{opacity:.6}
+.fill.nat{background:var(--nat)} .fill.art{background:var(--art)} .fill.spi{background:var(--spi)}
+.s-nat{stroke:var(--nat);fill:var(--nat)} .s-art{stroke:var(--art);fill:var(--art)} .s-spi{stroke:var(--spi);fill:var(--spi)}
+.cv .ring.s-nat,.cv .ring.s-art,.cv .ring.s-spi{fill:var(--panel)}
+.cv .ln.s-nat,.cv .ln.s-art,.cv .ln.s-spi{fill:none}
+.glab{font-size:12px;color:var(--muted);margin:8px 0 2px;padding-top:8px;border-top:1px dashed var(--cg2)}
+.innote{font-size:13px;color:var(--muted)}
+.clgrid{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(min(100%,420px),1fr))}
+.cgrp{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px;display:grid;gap:8px;align-content:start;min-width:0}
+.cgh{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.cgh h3{font:400 20px/1.2 var(--disp);overflow-wrap:anywhere}
+.cgc{font:400 12px/1 var(--mono);color:var(--muted);margin-left:auto}
+.cgm{font-size:13px;color:var(--muted)}
+.rdot{width:12px;height:12px;border-radius:50%;flex:none}
+.rd-phys{background:var(--phys)} .rd-emo{background:var(--emo)} .rd-intel{background:var(--intel)}
+.rd-nat{background:var(--nat)} .rd-art{background:var(--art)} .rd-spi{background:var(--spi)}
+ul.cls{margin:0;padding:0;list-style:none;display:grid}
+.cl{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;padding:8px 0;border-top:1px solid var(--line);font-size:14px;min-width:0}
+.cl .rm{flex-basis:100%;font-size:13px;color:var(--muted)}
+.cl .chip{max-width:100%;overflow-wrap:anywhere}
 .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom,0px));max-width:min(92vw,420px);background:var(--fg);color:var(--bg);padding:10px 14px;border-radius:8px;font-size:14px;z-index:20}
 @media (min-width:760px){ .heat{grid-template-columns:5em repeat(14,minmax(30px,1fr))} }
 @media (prefers-reduced-motion:reduce){ *{scroll-behavior:auto!important} }
@@ -210,8 +236,8 @@ input[type=text],input[type=date],select{font:inherit;font-size:15px;min-height:
 <body>
 <div class="wrap">
   <header>
-    <h1>바이오리듬 보드</h1>
-    <p class="lede">생년월일로 신체·감성·지성 주기를 계산해 사람별 컨디션을 보고, 같은 날 부딪치기 쉬운 조합을 미리 확인합니다.</p>
+    <div class="brand"><img id="logo" width="48" height="48" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><h1>바이오리듬 보드</h1></div>
+    <p class="lede">생년월일로 신체·감성·지성과 직관·예술·영적 리듬을 계산해 사람별 컨디션을 보고, 같은 날 부딪치기 쉬운 조합과 리듬을 미리 확인합니다.</p>
     <svg id="trace" class="trace" viewBox="0 0 660 60" preserveAspectRatio="none" aria-hidden="true"></svg>
   </header>
 
@@ -236,9 +262,16 @@ input[type=text],input[type=date],select{font:inherit;font-size:15px;min-height:
     <div id="pairs"></div>
   </section>
 
+  <section aria-labelledby="hClash">
+    <h2 id="hClash">리듬 충돌</h2>
+    <p class="sub">서로 반대로 움직이는 리듬만 따로 모았습니다. 한쪽이 +40% 이상이고 다른 쪽이 −40% 이하인 경우입니다.</p>
+    <div id="clashCtl"></div>
+    <div id="clash"></div>
+  </section>
+
   <section aria-labelledby="hBoard">
     <h2 id="hBoard">사람별 컨디션</h2>
-    <p class="sub">막대가 오른쪽으로 길수록 좋고, 왼쪽으로 길수록 나쁩니다. 가운데 마름모는 좋음과 나쁨이 바뀌는 위험일입니다.</p>
+    <p class="sub">막대가 오른쪽으로 길수록 좋고, 왼쪽으로 길수록 나쁩니다. 가운데 마름모는 좋음과 나쁨이 바뀌는 위험일입니다. 아래쪽 직관·예술·영적은 확장 리듬입니다.</p>
     <div id="board"></div>
   </section>
 
@@ -278,7 +311,7 @@ input[type=text],input[type=date],select{font:inherit;font-size:15px;min-height:
   <details class="notes">
     <summary>계산 방법과 읽는 법</summary>
     <div>
-      <p>태어난 날부터 센 일수를 주기로 나눠 사인 곡선으로 계산합니다. 신체 23일, 감성 28일, 지성 33일 주기이며, 값이 +40%를 넘으면 좋음, −40%보다 낮으면 나쁨입니다.</p>
+      <p>태어난 날부터 센 일수를 주기로 나눠 사인 곡선으로 계산합니다. 기본 리듬은 신체 23일, 감성 28일, 지성 33일이고 확장 리듬은 직관 38일, 예술 43일, 영적 53일입니다. 값이 +40%를 넘으면 좋음, −40%보다 낮으면 나쁨입니다.</p><p>종합 상태와 충돌 주의 판정에는 기본 3개 리듬만 사용합니다. 확장 리듬은 ‘리듬 충돌’ 구역과 곡선에서 따로 봅니다.</p><p>리듬 충돌은 두 가지로 나눕니다. 같은 리듬이 두 사람 사이에서 반대일 때(사람 사이)와 한 사람의 서로 다른 두 리듬이 반대일 때(한 사람 안)입니다. 두 값의 차이가 150%포인트 이상이면 강함으로 표시합니다.</p>
       <p>위험일은 곡선이 +에서 −로, 또는 −에서 +로 바뀌는 날입니다. 컨디션이 흔들리기 쉬운 날로 봅니다.</p>
       <p>충돌 주의는 감성이 낮을수록, 신체와 지성이 낮을수록 예민하다고 보고 두 사람의 예민함이 함께 클 때 표시합니다. 한 사람은 감성이 높고 다른 사람은 가라앉아 있을 때도 주의로 표시합니다.</p>
       <p>바이오리듬은 과학적으로 입증된 이론이 아닙니다. 하루를 점검하는 참고 자료로만 사용하세요.</p>
@@ -292,6 +325,9 @@ input[type=text],input[type=date],select{font:inherit;font-size:15px;min-height:
 'use strict';
 /*CORE*/
 var CYC=[{k:'p',P:23},{k:'e',P:28},{k:'i',P:33}];
+var EXT=[{k:'n',P:38},{k:'a',P:43},{k:'s',P:53}];
+var ALL=CYC.concat(EXT);
+var ORDER=['p','e','i','n','a','s'];
 function pad(n){return n<10?'0'+n:''+n}
 function dayNum(s){var m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(s);if(!m)return NaN;return Date.UTC(+m[1],+m[2]-1,+m[3])/86400000}
 function addDays(s,n){var d=new Date((dayNum(s)+n)*86400000);return d.getUTCFullYear()+'-'+pad(d.getUTCMonth()+1)+'-'+pad(d.getUTCDate())}
@@ -300,11 +336,10 @@ function calc(birth,date){
   var d=dayNum(date)-dayNum(birth);
   if(!(d>=0))return null;
   var o={d:d,v:{},c:{},mean:0,anyCrit:false},sum=0;
-  CYC.forEach(function(c){
+  ALL.forEach(function(c,idx){
     var v=Math.sin(2*Math.PI*d/c.P);
     o.v[c.k]=v;o.c[c.k]=isCritical(d,c.P);
-    if(o.c[c.k])o.anyCrit=true;
-    sum+=v;
+    if(idx<3){if(o.c[c.k])o.anyCrit=true;sum+=v}
   });
   o.mean=sum/3;
   return o;
@@ -322,11 +357,49 @@ function pairInfo(a,b){
   if(lvl<1&&gap>=1.5&&Math.min(a.v.e,b.v.e)<=-0.4){lvl=1;gapOnly=true}
   return {lvl:lvl,g:g,gap:gap,gapOnly:gapOnly};
 }
+/* same rhythm, two people: one clearly up and one clearly down */
+function rhythmClash(a,b,k){
+  var x=a.v[k],y=b.v[k];
+  if(!((x>=0.4&&y<=-0.4)||(x<=-0.4&&y>=0.4)))return 0;
+  return Math.abs(x-y)>=1.5?2:1;
+}
+/* one person, two different rhythms moving in opposite directions */
+function innerClash(c){
+  var out=[],i,j,x,y;
+  for(i=0;i<ORDER.length;i++)for(j=i+1;j<ORDER.length;j++){
+    x=c.v[ORDER[i]];y=c.v[ORDER[j]];
+    if((x>=0.4&&y<=-0.4)||(x<=-0.4&&y>=0.4)){
+      out.push({hi:x>=0.4?ORDER[i]:ORDER[j],lo:x>=0.4?ORDER[j]:ORDER[i],gap:Math.abs(x-y)});
+    }
+  }
+  out.sort(function(a,b){return b.gap-a.gap});
+  return out;
+}
 /*ENDCORE*/
 
 var $=function(id){return document.getElementById(id)};
 function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
-var CN={p:{name:'신체',P:23,cls:'phys'},e:{name:'감성',P:28,cls:'emo'},i:{name:'지성',P:33,cls:'intel'}};
+var CN={p:{name:'신체',P:23,cls:'phys'},e:{name:'감성',P:28,cls:'emo'},i:{name:'지성',P:33,cls:'intel'},
+  n:{name:'직관',P:38,cls:'nat'},a:{name:'예술',P:43,cls:'art'},s:{name:'영적',P:53,cls:'spi'}};
+var EXTK=['n','a','s'];
+var MEAN={p:'체력과 일의 속도가 맞지 않습니다.',e:'기분의 온도차로 말이 엇갈립니다.',i:'판단과 집중력 차이로 의견이 갈립니다.',
+  n:'감이 달라 결정 방향이 갈립니다.',a:'취향과 표현 방식이 엇갈립니다.',s:'가치관과 의미를 두는 곳이 엇갈립니다.'};
+var INNER={
+  ie:'머리는 맑은데 기분이 따라주지 않습니다. 말투가 날카로워지기 쉽습니다.',
+  ei:'기분은 좋은데 판단이 흐립니다. 들뜬 결정에 주의하세요.',
+  pi:'몸은 가벼운데 집중이 흐립니다. 몸 쓰는 일을 먼저 하세요.',
+  ip:'생각은 잘 돌아가는데 몸이 무겁습니다. 앉아서 하는 일이 맞습니다.',
+  pe:'몸은 좋은데 마음이 가라앉아 있습니다. 활동으로 풀어 보세요.',
+  ep:'기분은 좋은데 몸이 무겁습니다. 무리한 일정은 피하세요.',
+  ni:'감은 좋은데 근거가 약합니다. 확인한 뒤 결정하세요.',
+  'in':'분석은 잘 되는데 감이 둔합니다. 수치와 자료로 판단하세요.',
+  ne:'감은 좋은데 기분이 흔들립니다. 감정과 직감을 구분해 보세요.',
+  en:'기분은 좋은데 직감이 둔합니다. 즉흥 판단을 줄이세요.',
+  ai:'감각과 표현은 살아 있는데 판단이 흐립니다. 작업은 하되 확정은 미루세요.',
+  ia:'논리는 되는데 감각이 둔합니다. 창작보다 정리에 맞는 날입니다.',
+  se:'마음 깊은 곳은 평온한데 기분이 가라앉아 있습니다. 조용히 쉬어 가세요.',
+  es:'기분은 좋은데 내면이 비어 있습니다. 들뜬 약속은 줄이세요.'
+};
 var SL={good:'좋음',bad:'나쁨',mid:'보통',crit:'위험일'};
 var WD=['일','월','화','수','목','금','토'];
 var EXAMPLES=[
@@ -344,7 +417,7 @@ function thou(n){return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,',')}
 function birthKo(s){return s.replace(/^(\d{4})-(\d{2})-(\d{2})$/,'$1.$2.$3')+'생'}
 
 var state={people:[],loaded:false,mode:'local',date:todayStr(),editId:null,delId:null,
-  chartMode:'person',chartPerson:null,chartCycle:'e',focusEdit:false};
+  chartMode:'person',chartPerson:null,chartCycle:'e',chartSet:'core',clashMode:'between',focusEdit:false};
 var colRef=null, toastTimer=null;
 
 /* ---------- storage ---------- */
@@ -453,7 +526,7 @@ function renderSummary(){
     '<span class="sm"><i class="dot mid"></i>보통 <b>'+cnt.mid+'</b></span>'+
     '<span class="sm"><i class="dot bad"></i>나쁨 <b>'+cnt.bad+'</b></span>'+
     '<span class="sm">위험일 있는 사람 <b>'+crit+'</b></span>'+
-    '<span class="sm">충돌 주의 <b>'+pr.length+'</b>쌍'+(pr.length?' (높음 '+hi+', 주의 '+lo+')':'')+'</span>';
+    '<span class="sm">충돌 주의 <b>'+pr.length+'</b>쌍'+(pr.length?' (높음 '+hi+', 주의 '+lo+')':'')+'</span>'+clashSummary();
 }
 function renderPairs(){
   var el=$('pairs');
@@ -506,7 +579,9 @@ function renderBoard(){
     if(c){var ov=overallOf(c.mean);h+='<span class="pill '+ov+'">종합 '+SL[ov]+'</span>'}
     h+='</div><div class="pmeta">'+birthKo(p.birth)+(c?' · 태어난 지 '+thou(c.d)+'일째':'')+'</div>';
     if(c){
-      h+='<div class="gauges">'+gaugeRow('p',c)+gaugeRow('e',c)+gaugeRow('i',c)+'</div>';
+      h+='<div class="gauges">'+gaugeRow('p',c)+gaugeRow('e',c)+gaugeRow('i',c)+'<p class="glab">확장 리듬</p>'+gaugeRow('n',c)+gaugeRow('a',c)+gaugeRow('s',c)+'</div>';
+      var icn=innerClash(c).length;
+      if(icn)h+='<p class="innote">리듬 엇갈림 '+icn+'건 (위의 \u2018리듬 충돌\u2019에서 확인)</p>';
       var w=(watch[p.id]||[]).slice().sort(function(a,b){return b.l-a.l});
       if(w.length){
         var top=w[0].l;
@@ -538,6 +613,7 @@ function swLine(cls,dash,style){
   return '<svg width="26" height="10" viewBox="0 0 26 10" aria-hidden="true"><line x1="1" y1="5" x2="25" y2="5" class="'+(cls||'')+'" style="'+(style||'')+'" stroke-width="3" stroke-linecap="round"'+(dash?' stroke-dasharray="'+dash+'"':'')+'/></svg>';
 }
 var DASH=['','','','','7 4','7 4','2 4','2 4'];
+function setKeys(){return state.chartSet==='ext'?EXTK:(state.chartSet==='all'?ORDER:['p','e','i'])}
 function renderChartCtl(){
   var el=$('chartCtl');
   if(!state.loaded||!state.people.length){el.innerHTML='';return}
@@ -547,13 +623,15 @@ function renderChartCtl(){
   if(state.chartMode==='person'){
     h+='<select id="chartPerson" aria-label="곡선을 볼 사람">'+state.people.map(function(p){
       return '<option value="'+esc(p.id)+'"'+(p.id===chartPid()?' selected':'')+'>'+esc(p.name)+'</option>'}).join('')+'</select>';
+    h+='<div class="seg" role="group" aria-label="표시할 리듬">'+[['core','기본 3'],['ext','확장 3'],['all','전체 6']].map(function(x){
+      return '<button type="button" data-cs="'+x[0]+'" aria-pressed="'+(state.chartSet===x[0])+'">'+x[1]+'</button>'}).join('')+'</div>';
   }else{
-    h+='<div class="seg" role="group" aria-label="겹쳐 볼 주기">'+['p','e','i'].map(function(k){
+    h+='<div class="seg" role="group" aria-label="겹쳐 볼 리듬">'+ORDER.map(function(k){
       return '<button type="button" data-cc="'+k+'" aria-pressed="'+(state.chartCycle===k)+'">'+CN[k].name+'</button>'}).join('')+'</div>';
   }
   h+='</div><div class="clegend">';
   if(state.chartMode==='person'){
-    h+=['p','e','i'].map(function(k){return '<span>'+swLine('s-'+CN[k].cls)+CN[k].name+' '+CN[k].P+'일</span>'}).join('');
+    h+=setKeys().map(function(k){return '<span>'+swLine('s-'+CN[k].cls,EXTK.indexOf(k)>=0?'7 4':'')+CN[k].name+' '+CN[k].P+'일</span>'}).join('');
     h+='<span><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><circle cx="6" cy="6" r="4" fill="none" stroke="currentColor" stroke-width="2"/></svg>위험일(0선을 지나는 때)</span>';
   }else{
     h+=state.people.map(function(p,i){return '<span>'+swLine('', DASH[i%8], 'stroke:var(--pc'+(i%8)+')')+esc(p.name)+'</span>'}).join('');
@@ -599,9 +677,9 @@ function drawChart(){
     var pp=state.people.filter(function(p){return p.id===chartPid()})[0];
     if(pp){
       var d0=d0n-dayNum(pp.birth);
-      ['p','e','i'].forEach(function(kk){
-        var P=CN[kk].P,cls='s-'+CN[kk].cls,d=path(d0,P);
-        if(d)s+='<path class="ln '+cls+'" d="'+d+'"/>';
+      setKeys().forEach(function(kk){
+        var P=CN[kk].P,cls='s-'+CN[kk].cls,d=path(d0,P),ex=EXTK.indexOf(kk)>=0;
+        if(d)s+='<path class="ln '+cls+'" d="'+d+'"'+(ex?' stroke-dasharray="7 4"':'')+'/>';
         var hh=P/2,kmin=Math.ceil((d0+T0)/hh),kmax=Math.floor((d0+T1)/hh);
         for(k=kmin;k<=kmax;k++){
           var tt2=k*hh-d0;
@@ -612,7 +690,7 @@ function drawChart(){
       });
     }
   }else{
-    var kk=state.chartCycle,P2=CN[kk].P;
+    var kc=state.chartCycle,P2=CN[kc].P;
     state.people.forEach(function(p,i){
       var d0=d0n-dayNum(p.birth),dd2=path(d0,P2),col='var(--pc'+(i%8)+')';
       if(dd2)s+='<path class="ln" style="stroke:'+col+'" d="'+dd2+'"'+(DASH[i%8]?' stroke-dasharray="'+DASH[i%8]+'"':'')+'/>';
@@ -671,7 +749,70 @@ function renderSaveNote(){
     :'이 기기의 브라우저에만 저장됩니다. 브라우저 데이터를 지우면 명단도 사라집니다.';
 }
 function render(){
-  renderDate();renderSummary();renderPairs();renderBoard();renderChartCtl();drawChart();renderHeat();renderSaveNote();
+  renderDate();renderSummary();renderPairs();renderClash();renderBoard();renderChartCtl();drawChart();renderHeat();renderSaveNote();
+}
+
+/* ---------- rhythm clashes ---------- */
+function clashData(date){
+  var arr=state.people.map(function(p){return {p:p,c:calc(p.birth,date)}}).filter(function(x){return x.c});
+  var between={},inner=[],nb=0,ni=0,i,j;
+  ORDER.forEach(function(k){between[k]=[]});
+  for(i=0;i<arr.length;i++)for(j=i+1;j<arr.length;j++){
+    (function(A,B){
+      ORDER.forEach(function(k){
+        var l=rhythmClash(A.c,B.c,k);
+        if(!l)return;
+        var a=A,b=B;
+        if(a.c.v[k]<b.c.v[k]){var t=a;a=b;b=t}
+        between[k].push({good:a.p,bad:b.p,gv:a.c.v[k],bv:b.c.v[k],lvl:l,gap:a.c.v[k]-b.c.v[k]});
+        nb++;
+      });
+    })(arr[i],arr[j]);
+  }
+  ORDER.forEach(function(k){between[k].sort(function(x,y){return y.gap-x.gap})});
+  arr.forEach(function(x){var l=innerClash(x.c);if(l.length){inner.push({p:x.p,c:x.c,list:l});ni+=l.length}});
+  inner.sort(function(x,y){return y.list.length-x.list.length||y.list[0].gap-x.list[0].gap});
+  return {between:between,inner:inner,nb:nb,ni:ni};
+}
+function clashSummary(){
+  var d=clashData(state.date);
+  return '<span class="sm">리듬 충돌 <b>'+d.nb+'</b>건(사람 사이) · <b>'+d.ni+'</b>건(한 사람 안)</span>';
+}
+function renderClash(){
+  var ctl=$('clashCtl'),el=$('clash');
+  if(!state.loaded||state.people.length<1){
+    ctl.innerHTML='';
+    el.innerHTML='<p class="calm">'+(state.loaded?'사람을 등록하면 리듬 충돌이 표시됩니다.':'불러오는 중입니다.')+'</p>';
+    return;
+  }
+  var d=clashData(state.date),h;
+  ctl.innerHTML='<div class="ctl"><div class="seg" role="group" aria-label="충돌 종류">'+
+    '<button type="button" data-km="between" aria-pressed="'+(state.clashMode==='between')+'">사람 사이 '+d.nb+'</button>'+
+    '<button type="button" data-km="inner" aria-pressed="'+(state.clashMode==='inner')+'">한 사람 안 '+d.ni+'</button></div></div>';
+  if(state.clashMode==='between'){
+    if(state.people.length<2){el.innerHTML='<p class="calm">사람 사이 충돌을 보려면 2명 이상 등록해 주세요.</p>';return}
+    if(!d.nb){el.innerHTML='<p class="calm">'+md(state.date)+'에는 한쪽이 크게 오르고 다른 쪽이 크게 내려간 리듬이 없습니다.</p>';return}
+    h='<div class="clgrid">';
+    ORDER.forEach(function(k){
+      var L=d.between[k];
+      if(!L.length)return;
+      h+='<article class="cgrp"><div class="cgh"><i class="rdot rd-'+CN[k].cls+'"></i><h3>'+CN[k].name+' 리듬</h3><span class="tag">'+(EXTK.indexOf(k)<0?'기본':'확장')+'</span><span class="cgc">'+L.length+'쌍</span></div>'+
+        '<p class="cgm">'+MEAN[k]+'</p><ul class="cls">'+
+        L.slice(0,4).map(function(r){
+          return '<li class="cl"><b class="chip good">'+esc(r.good.name)+' '+fmtPct(r.gv)+'</b><span class="x">↔</span><b class="chip bad">'+esc(r.bad.name)+' '+fmtPct(r.bv)+'</b><span class="lvl l'+r.lvl+'">'+(r.lvl===2?'강함':'주의')+'</span></li>';
+        }).join('')+'</ul>'+(L.length>4?'<p class="cgm">외 '+(L.length-4)+'쌍</p>':'')+'</article>';
+    });
+    el.innerHTML=h+'</div>';
+  }else{
+    if(!d.ni){el.innerHTML='<p class="calm">'+md(state.date)+'에는 한 사람 안에서 서로 반대로 움직이는 리듬이 없습니다.</p>';return}
+    el.innerHTML='<div class="clgrid">'+d.inner.map(function(x){
+      return '<article class="cgrp"><div class="cgh"><h3>'+esc(x.p.name)+'</h3><span class="cgc">'+x.list.length+'건</span></div><ul class="cls">'+
+        x.list.slice(0,4).map(function(r){
+          return '<li class="cl"><b class="chip good">'+CN[r.hi].name+' '+fmtPct(x.c.v[r.hi])+'</b><span class="x">↔</span><b class="chip bad">'+CN[r.lo].name+' '+fmtPct(x.c.v[r.lo])+'</b>'+
+            '<span class="lvl l'+(r.gap>=1.5?2:1)+'">'+(r.gap>=1.5?'강함':'주의')+'</span><span class="rm">'+(INNER[r.hi+r.lo]||'서로 반대로 움직이는 날입니다.')+'</span></li>';
+        }).join('')+'</ul>'+(x.list.length>4?'<p class="cgm">외 '+(x.list.length-4)+'건</p>':'')+'</article>';
+    }).join('')+'</div>';
+  }
 }
 
 /* ---------- events ---------- */
@@ -745,6 +886,10 @@ document.addEventListener('click',function(e){
     if(cm){state.chartMode=cm;renderChartCtl();drawChart();return}
     var cc=b.getAttribute('data-cc');
     if(cc){state.chartCycle=cc;renderChartCtl();drawChart();return}
+    var cs=b.getAttribute('data-cs');
+    if(cs){state.chartSet=cs;renderChartCtl();drawChart();return}
+    var km=b.getAttribute('data-km');
+    if(km){state.clashMode=km;renderClash();return}
     var dt=b.getAttribute('data-date');
     if(dt){setDate(dt);return}
   }
@@ -763,12 +908,14 @@ window.addEventListener('resize',function(){
 /* header trace: the three real periods, drawn from day 0 */
 (function(){
   var span=40,W=660,H=60,svg=$('trace'),cls=['tp','tp','te','ti'],out='';
-  [[23,'tp'],[28,'te'],[33,'ti']].forEach(function(c){
+  [[23,'tp'],[28,'te'],[33,'ti'],[38,'tn'],[43,'ta'],[53,'ts']].forEach(function(c){
     var d='';
     for(var t=0;t<=span;t+=0.5){var x=t/span*W,y=H/2-Math.sin(2*Math.PI*t/c[0])*(H/2-4);d+=(t===0?'M':'L')+x.toFixed(1)+' '+y.toFixed(1)}
     out+='<path class="'+c[1]+'" d="'+d+'"/>';
   });
   svg.innerHTML=out;
+  var ai=document.querySelector('link[rel="apple-touch-icon"]');
+  if(ai&&ai.href)$('logo').src=ai.href;
 })();
 
 render();
