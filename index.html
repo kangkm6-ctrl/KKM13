@@ -74,7 +74,7 @@ section{margin-top:40px}
 .btn.icon{width:40px;padding:0;display:inline-grid;place-items:center}
 .btn.danger{color:var(--bad);border-color:var(--bad)}
 button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
-input[type=text],input[type=date],select{font:inherit;font-size:15px;min-height:40px;padding:0 10px;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--fg);max-width:100%}
+input[type=text],input[type=date],select{font:inherit;font-size:16px;min-height:40px;padding:0 10px;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--fg);max-width:100%}
 
 .datebar{margin-top:26px;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 20px}
 .dbig{font:400 clamp(28px,6vw,38px)/1.1 var(--disp);display:block}
@@ -226,91 +226,223 @@ ul.cls{margin:0;padding:0;list-style:none;display:grid}
 .cl{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;padding:8px 0;border-top:1px solid var(--line);font-size:14px;min-width:0}
 .cl .rm{flex-basis:100%;font-size:13px;color:var(--muted)}
 .cl .chip{max-width:100%;overflow-wrap:anywhere}
+.ymd{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.ymd select{min-width:0}
+.ymd-s{font-size:14px;color:var(--muted)}
+.sv{font-weight:600}
+.sv.ok{color:var(--good)}
+.sv.bad{color:var(--bad)}
+.bk{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+/* compact layout */
+body{padding-block:10px 20px;font-size:14px;line-height:1.45}
+h1{font-size:26px;line-height:1.1}
+.brand{gap:10px}
+.brand img{width:36px;height:36px;border-radius:9px}
+.trace{height:24px;margin-top:6px}
+.datebar{margin-top:8px;display:flex;flex-wrap:nowrap;align-items:center;gap:6px}
+.dpick{position:relative;flex:1;min-width:0;display:grid;place-items:center;min-height:40px;border:1px solid var(--line);border-radius:6px;background:var(--panel);cursor:pointer;padding:0 8px;text-align:center}
+.dpick .dbig{font:400 20px/1.1 var(--disp);display:inline}
+.dpick .drel{font:400 12px/1 var(--mono);color:var(--muted);margin-left:8px}
+.dover{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;border:0;padding:0;font-size:16px;min-height:0}
+.btn.icon{width:38px;flex:none}
+.sumrow{margin-top:8px;padding:6px 0;gap:2px 12px;font-size:12.5px}
+.sec{margin-top:4px;border-top:1px solid var(--line)}
+.sec>summary{display:flex;align-items:center;gap:8px;min-height:44px;cursor:pointer;list-style:none}
+.sec>summary::-webkit-details-marker{display:none}
+.sec>summary::before{content:"";width:7px;height:7px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(-45deg);flex:none;margin:0 2px}
+.sec[open]>summary::before{transform:rotate(45deg)}
+.sec>summary h2{font-size:19px;margin:0}
+.sec .ct{margin-left:auto;font:400 12px/1.2 var(--mono);color:var(--muted);text-align:right}
+.sec>.body{padding-bottom:10px}
+.calm{padding:8px 10px;font-size:13px}
+.pairs{gap:8px}
+.pair{padding:8px 10px;gap:4px}
+.phead h3{font-size:18px}
+.pl{display:flex;flex-wrap:wrap;gap:2px 8px;align-items:baseline;font-size:12.5px}
+.pl b{min-width:2.8em;font-weight:600}
+.ml{font:500 12px/1.3 var(--mono)}
+.ml.good{color:var(--good)} .ml.bad{color:var(--bad)} .ml.crit{color:var(--warn)} .ml.mid{color:var(--muted)}
+.pwhy{font-size:13px;line-height:1.4}
+.clgrid{gap:8px}
+.cgrp{padding:8px 10px;gap:4px}
+.cgh h3{font-size:17px}
+.cl{padding:4px 0}
+.ctl{margin-bottom:6px;gap:6px}
+.seg button{min-height:34px;padding:0 10px;font-size:13px}
+select{min-height:34px}
+.clegend{margin-bottom:4px;font-size:12px;gap:2px 12px}
+.chartbox{padding:6px 6px 2px}
+.heatinfo{margin-bottom:6px;font-size:13px}
+.heat{gap:2px}
+.hh{min-height:34px;padding:1px 0}
+.hh .mo{min-height:10px}
+.hc,.cc{height:24px;font-size:12px}
+.hleg{margin-top:6px;gap:2px 10px;font-size:11.5px}
+.savenote{font-size:12px;margin-top:6px}
+.bk{margin-top:8px}
+.notes{margin-top:6px;padding-top:6px;font-size:13px}
+.exnote{margin:0;padding:3px 8px;font-size:12.5px;gap:6px}
+.pcard{padding:8px 10px;gap:3px;margin:0 0 4px}
+.pname h3{font-size:18px}
+.g{padding:2px 0;gap:8px}
+.glab{margin:4px 0 0;padding-top:4px}
+.pact{margin-top:2px}
+.mtool{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.mtool .btn{margin-left:auto}
+.mhead,.mrow{display:grid;grid-template-columns:4.4em repeat(3,minmax(0,1fr)) 4px repeat(3,minmax(0,1fr));gap:3px;align-items:stretch}
+.mhead{font-size:11px;color:var(--muted);padding:0 3px 3px}
+.mh{display:flex;align-items:center;justify-content:center;gap:3px;white-space:nowrap}
+.mh .rdot{width:7px;height:7px}
+.mrow{width:100%;text-align:left;font:inherit;color:inherit;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:3px;margin-bottom:3px;cursor:pointer}
+.mrow:hover,.mrow[aria-expanded="true"]{border-color:var(--fg)}
+.mn2{display:grid;align-content:center;min-width:0;padding-left:3px}
+.mnm{font-weight:600;font-size:13px;display:flex;align-items:center;gap:3px;min-width:0}
+.mnm .t{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.wm{display:inline-flex;flex:none}
+.wm.w2{color:var(--bad)} .wm.w1{color:var(--warn)}
+.wm svg{width:12px;height:12px}
+.mov{font-size:11px;color:var(--muted)}
+.mov.good{color:var(--good)} .mov.bad{color:var(--bad)}
+.mna{grid-column:2 / -1;align-self:center;font-size:12px;color:var(--muted)}
+.mc{display:grid;gap:2px;align-content:center;padding:3px 3px 4px;border-radius:4px;background:var(--h-mid);min-width:0}
+.mc.good{background:var(--good-bg)} .mc.bad{background:var(--bad-bg)}
+.mc.crit{background:repeating-linear-gradient(135deg,var(--warn-bg) 0 4px,var(--panel) 4px 8px);box-shadow:inset 0 0 0 1px var(--warn)}
+.mv{font:500 12px/1 var(--mono);text-align:center;font-variant-numeric:tabular-nums}
+.mc.good .mv{color:var(--good)} .mc.bad .mv{color:var(--bad)} .mc.crit .mv{color:var(--warn)}
+.mb{position:relative;height:4px;background:var(--cg);border-radius:2px;overflow:hidden;display:block}
+.mb i{position:absolute;top:0;bottom:0;display:block}
+.mb .phys{background:var(--phys)} .mb .emo{background:var(--emo)} .mb .intel{background:var(--intel)}
+.mb .nat{background:var(--nat)} .mb .art{background:var(--art)} .mb .spi{background:var(--spi)}
+.mlegend{font-size:11.5px;color:var(--muted);margin:2px 0 4px}
 .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom,0px));max-width:min(92vw,420px);background:var(--fg);color:var(--bg);padding:10px 14px;border-radius:8px;font-size:14px;z-index:20}
 @media (min-width:760px){ .heat{grid-template-columns:5em repeat(14,minmax(30px,1fr))} }
 @media (prefers-reduced-motion:reduce){ *{scroll-behavior:auto!important} }
+/* compact 2: shortest layout */
+body{padding-block:6px 16px}
+.top{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px}
+.brand{gap:7px;margin-right:auto;min-width:0}
+.brand img{width:28px;height:28px;border-radius:7px}
+h1{font-size:18px;line-height:1.1;white-space:nowrap}
+.sumrow{display:flex;flex-wrap:wrap;margin:0;padding:0;border:0;gap:2px 10px;font-size:12px}
+.sm{gap:4px}
+.dot{width:9px;height:9px}
+.datebar{margin-top:6px}
+.datebar .btn{min-height:36px}
+.dpick{min-height:36px}
+.dpick .dbig{font-size:18px}
+.sec{margin-top:2px}
+.sec>summary{min-height:38px}
+.sec>summary h2{font-size:17px}
+.sec>.body{padding-bottom:6px}
+.pairs{gap:6px}
+.pair{padding:6px 10px;gap:2px}
+.phead{gap:8px}
+.phead h3{font-size:16px}
+.pl{font-size:12px;gap:0 8px}
+.pnote{font-size:12px;color:var(--muted);margin:0 0 6px}
+.mtool{margin-bottom:3px;gap:6px}
+.mtool .btn.small{min-height:28px;padding:0 8px;font-size:12px}
+.mlegend{margin:0;font-size:11px}
+.mhead,.mrow{grid-template-columns:5.2em repeat(3,minmax(0,1fr)) 4px repeat(3,minmax(0,1fr))}
+.mrow{padding:2px;margin-bottom:2px}
+.mc{padding:2px 3px 3px;gap:1px}
+.mv{font-size:11.5px}
+.mnm{font-size:13px;gap:4px}
+.mnm .dot{flex:none}
+.cgrp{padding:6px 10px;gap:2px}
+.cgh h3{font-size:16px}
+.cl{padding:3px 0;gap:4px 6px;font-size:13px}
+.cl .chip{font-size:12px;padding:2px 6px}
+.cl .rm{font-size:12px}
+.lvl{font-size:11px;padding:3px 6px}
+.clgrid{gap:6px}
+.hh{min-height:32px}
+.hc,.cc{height:22px}
+.hleg{margin-top:4px;gap:2px 10px;font-size:11px}
+.hleg .sw{width:12px;height:10px;border-radius:2px}
+.hleg span{gap:3px}
+.addform{gap:6px 8px}
+.addform>.fld:first-child{flex:1 1 100%}
+.savenote{margin-top:4px}
+.bk{margin-top:6px}
+.mtool{flex-wrap:wrap}
+.mtool .mlegend{flex:1 1 0;min-width:0}
+.mtool>.btn{white-space:nowrap;flex:none}
+.mtool .exnote{flex:1 1 100%;display:flex;flex-wrap:nowrap;align-items:center;justify-content:space-between;padding:2px 8px}
+.mtool .exnote .btn{margin-left:0;min-height:24px;padding:0 8px;white-space:nowrap}
 </style>
 
 <style>body{margin:0}[hidden]{display:none!important}</style>
 </head>
 <body>
 <div class="wrap">
-  <header>
-    <div class="brand"><img id="logo" width="48" height="48" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><h1>바이오리듬 보드</h1></div>
-    <p class="lede">생년월일로 신체·감성·지성과 직관·예술·영적 리듬을 계산해 사람별 컨디션을 보고, 같은 날 부딪치기 쉬운 조합과 리듬을 미리 확인합니다.</p>
-    <svg id="trace" class="trace" viewBox="0 0 660 60" preserveAspectRatio="none" aria-hidden="true"></svg>
+  <header class="top">
+    <div class="brand"><img id="logo" width="28" height="28" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><h1>바이오리듬 보드</h1></div>
+    <div id="summary" class="sumrow" aria-live="polite"></div>
   </header>
 
   <div class="datebar" role="group" aria-label="기준 날짜">
-    <div>
-      <span id="dateBig" class="dbig"></span>
-      <span id="dateRel" class="drel"></span>
-    </div>
-    <div class="dctl">
-      <button id="prev" class="btn icon" type="button" aria-label="하루 전"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-      <input id="dateIn" type="date" aria-label="기준 날짜 선택">
-      <button id="next" class="btn icon" type="button" aria-label="하루 뒤"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="m6 3 5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-      <button id="today" class="btn" type="button">오늘</button>
-    </div>
+    <button id="prev" class="btn icon" type="button" aria-label="하루 전"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <label class="dpick"><span><span id="dateBig" class="dbig"></span><span id="dateRel" class="drel"></span></span><input id="dateIn" class="dover" type="date" aria-label="기준 날짜 선택"></label>
+    <button id="next" class="btn icon" type="button" aria-label="하루 뒤"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="m6 3 5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <button id="today" class="btn" type="button">오늘</button>
   </div>
 
-  <div id="summary" class="sumrow" aria-live="polite"></div>
+  <details class="sec" id="secPairs" open>
+    <summary><h2 id="hPairs">서로 조심할 조합</h2><span id="ctPairs" class="ct"></span></summary>
+    <div class="body"><div id="pairs"></div></div>
+  </details>
 
-  <section aria-labelledby="hPairs">
-    <h2 id="hPairs">서로 조심할 조합</h2>
-    <p class="sub">두 사람의 감성 컨디션이 함께 낮거나 크게 엇갈리는 날을 찾아 표시합니다.</p>
-    <div id="pairs"></div>
-  </section>
+  <details class="sec" id="secClash">
+    <summary><h2 id="hClash">리듬 충돌</h2><span id="ctClash" class="ct"></span></summary>
+    <div class="body"><div id="clashCtl"></div><div id="clash"></div></div>
+  </details>
 
-  <section aria-labelledby="hClash">
-    <h2 id="hClash">리듬 충돌</h2>
-    <p class="sub">서로 반대로 움직이는 리듬만 따로 모았습니다. 한쪽이 +40% 이상이고 다른 쪽이 −40% 이하인 경우입니다.</p>
-    <div id="clashCtl"></div>
-    <div id="clash"></div>
-  </section>
+  <details class="sec" id="secBoard" open>
+    <summary><h2 id="hBoard">사람별 컨디션</h2><span id="ctBoard" class="ct"></span></summary>
+    <div class="body"><div id="board"></div></div>
+  </details>
 
-  <section aria-labelledby="hBoard">
-    <h2 id="hBoard">사람별 컨디션</h2>
-    <p class="sub">막대가 오른쪽으로 길수록 좋고, 왼쪽으로 길수록 나쁩니다. 가운데 마름모는 좋음과 나쁨이 바뀌는 위험일입니다. 아래쪽 직관·예술·영적은 확장 리듬입니다.</p>
-    <div id="board"></div>
-  </section>
+  <details class="sec" id="secChart">
+    <summary><h2 id="hChart">곡선으로 보기</h2></summary>
+    <div class="body"><div id="chartCtl"></div><div class="chartbox"><div id="chartHost"></div></div></div>
+  </details>
 
-  <section aria-labelledby="hChart">
-    <h2 id="hChart">곡선으로 보기</h2>
-    <p class="sub">선택한 날짜 10일 전부터 20일 뒤까지입니다. 그래프의 날짜를 누르면 그 날로 이동합니다.</p>
-    <div id="chartCtl"></div>
-    <div class="chartbox"><div id="chartHost"></div></div>
-  </section>
-
-  <section aria-labelledby="hHeat">
-    <h2 id="hHeat">앞으로 14일</h2>
-    <p id="heatInfo" class="heatinfo"></p>
-    <div class="heatwrap"><div id="heat" class="heat"></div></div>
-    <div class="hleg" aria-hidden="false">
-      <span><i class="sw" style="background:var(--h-bad2)"></i>나쁨</span>
-      <span><i class="sw" style="background:var(--h-bad1)"></i>낮음</span>
-      <span><i class="sw" style="background:var(--h-mid)"></i>보통</span>
-      <span><i class="sw" style="background:var(--h-good1)"></i>높음</span>
-      <span><i class="sw" style="background:var(--h-good2)"></i>좋음</span>
-      <span><b style="font-family:var(--mono)">!</b>위험일이 하나라도 있는 날</span>
-      <span><i class="sw" style="background:var(--bad)"></i>충돌 높음 포함<i class="sw" style="background:var(--warn-bg);box-shadow:inset 0 0 0 1px var(--warn)"></i>주의만</span>
+  <details class="sec" id="secHeat">
+    <summary><h2 id="hHeat">앞으로 14일</h2><span id="ctHeat" class="ct"></span></summary>
+    <div class="body">
+      <p id="heatInfo" class="heatinfo"></p>
+      <div class="heatwrap"><div id="heat" class="heat"></div></div>
+      <div class="hleg">
+        <span>나쁨<i class="sw" style="background:var(--h-bad2)"></i><i class="sw" style="background:var(--h-bad1)"></i><i class="sw" style="background:var(--h-mid)"></i><i class="sw" style="background:var(--h-good1)"></i><i class="sw" style="background:var(--h-good2)"></i>좋음</span>
+        <span><b style="font-family:var(--mono)">!</b>위험일 포함</span>
+        <span>충돌<i class="sw" style="background:var(--bad)"></i>높음<i class="sw" style="background:var(--warn-bg);box-shadow:inset 0 0 0 1px var(--warn)"></i>주의</span>
+      </div>
     </div>
-  </section>
+  </details>
 
-  <section aria-labelledby="hAdd">
-    <h2 id="hAdd">사람 추가</h2>
-    <form id="addForm" class="addform" novalidate>
-      <div class="fld"><label for="addName">이름</label><input id="addName" type="text" maxlength="20" autocomplete="off" placeholder="예: 김민수"></div>
-      <div class="fld"><label for="addBirth">생년월일</label><input id="addBirth" type="date"></div>
-      <button class="btn primary" type="submit">추가</button>
-    </form>
-    <p id="addErr" class="err" role="alert" hidden></p>
-    <p id="saveNote" class="savenote"></p>
-  </section>
+  <details class="sec" id="secAdd">
+    <summary><h2 id="hAdd">사람 추가</h2><span id="ctAdd" class="ct"></span></summary>
+    <div class="body">
+      <form id="addForm" class="addform" novalidate>
+        <div class="fld"><label for="addName">이름</label><input id="addName" type="text" maxlength="20" autocomplete="off" placeholder="예: 김민수"></div>
+        <div class="fld"><label for="addBirth-y">생년월일</label><div id="addBirthBox" class="ymd"></div></div>
+        <button class="btn primary" type="submit">추가</button>
+      </form>
+      <p id="addErr" class="err" role="alert" hidden></p>
+      <p id="saveNote" class="savenote"></p>
+      <div class="bk">
+        <button id="expBtn" class="btn small" type="button">백업 내려받기</button>
+        <button id="impBtn" class="btn small" type="button">백업 불러오기</button>
+        <input id="impFile" type="file" accept=".json,application/json" hidden aria-label="백업 파일 선택">
+      </div>
+    </div>
+  </details>
 
   <details class="notes">
     <summary>계산 방법과 읽는 법</summary>
     <div>
+      <p>생년월일로 신체·감성·지성과 직관·예술·영적 리듬을 계산해 사람별 컨디션을 보고, 같은 날 부딪치기 쉬운 조합과 리듬을 미리 확인합니다.</p><p>‘사람별 컨디션’ 표의 숫자는 주기 값(%)이고, 푸른 바탕은 좋음, 붉은 바탕은 나쁨, 빗금은 위험일입니다. 이름을 누르면 상세와 수정·삭제가 열립니다.</p>
       <p>태어난 날부터 센 일수를 주기로 나눠 사인 곡선으로 계산합니다. 기본 리듬은 신체 23일, 감성 28일, 지성 33일이고 확장 리듬은 직관 38일, 예술 43일, 영적 53일입니다. 값이 +40%를 넘으면 좋음, −40%보다 낮으면 나쁨입니다.</p><p>종합 상태와 충돌 주의 판정에는 기본 3개 리듬만 사용합니다. 확장 리듬은 ‘리듬 충돌’ 구역과 곡선에서 따로 봅니다.</p><p>리듬 충돌은 두 가지로 나눕니다. 같은 리듬이 두 사람 사이에서 반대일 때(사람 사이)와 한 사람의 서로 다른 두 리듬이 반대일 때(한 사람 안)입니다. 두 값의 차이가 150%포인트 이상이면 강함으로 표시합니다.</p>
       <p>위험일은 곡선이 +에서 −로, 또는 −에서 +로 바뀌는 날입니다. 컨디션이 흔들리기 쉬운 날로 봅니다.</p>
       <p>충돌 주의는 감성이 낮을수록, 신체와 지성이 낮을수록 예민하다고 보고 두 사람의 예민함이 함께 클 때 표시합니다. 한 사람은 감성이 높고 다른 사람은 가라앉아 있을 때도 주의로 표시합니다.</p>
@@ -417,14 +549,21 @@ function thou(n){return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,',')}
 function birthKo(s){return s.replace(/^(\d{4})-(\d{2})-(\d{2})$/,'$1.$2.$3')+'생'}
 
 var state={people:[],loaded:false,mode:'local',date:todayStr(),editId:null,delId:null,
-  chartMode:'person',chartPerson:null,chartCycle:'e',chartSet:'core',clashMode:'between',focusEdit:false};
+  chartMode:'person',chartPerson:null,chartCycle:'e',chartSet:'core',clashMode:'between',saveOk:true,savedAt:null,openId:null,expAll:false,focusRow:null,addOpened:false,focusEdit:false};
 var colRef=null, toastTimer=null;
 
 /* ---------- storage ---------- */
 function validP(p){return p&&p.name&&isFinite(dayNum(p.birth))}
 function lsLoad(){try{var s=localStorage.getItem(LS_KEY);if(s){var a=JSON.parse(s);if(Array.isArray(a))return a.filter(validP)}}catch(e){}return []}
-function lsSave(){try{localStorage.setItem(LS_KEY,JSON.stringify(state.people))}catch(e){}}
-function fallbackLocal(){state.mode='local';state.people=lsLoad();state.loaded=true;render()}
+function lsProbe(){try{localStorage.setItem(LS_KEY+'.t','1');localStorage.removeItem(LS_KEY+'.t');return true}catch(e){return false}}
+function lsSave(){
+  try{
+    localStorage.setItem(LS_KEY,JSON.stringify(state.people));
+    state.saveOk=true;state.savedAt=new Date();
+    try{if(navigator.storage&&navigator.storage.persist)navigator.storage.persist()}catch(e2){}
+  }catch(e){state.saveOk=false}
+}
+function fallbackLocal(){state.mode='local';state.saveOk=lsProbe();state.people=lsLoad();state.loaded=true;render()}
 function initStore(){
   var P=(window.claude&&typeof window.claude.use==='function')?window.claude.use('db'):Promise.resolve(null);
   P.then(function(db){
@@ -509,99 +648,122 @@ var TRI='<svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><pat
 
 /* ---------- render ---------- */
 function renderDate(){
-  var d=state.date,diff=dayNum(d)-dayNum(todayStr());
-  $('dateBig').textContent=mdw(d);
-  $('dateRel').textContent=d.slice(0,4)+' · '+(diff===0?'오늘':(diff>0?diff+'일 뒤':(-diff)+'일 전'));
+  var d=state.date,diff=dayNum(d)-dayNum(todayStr()),y=d.slice(0,4),cy=todayStr().slice(0,4);
+  $('dateBig').textContent=(y!==cy?y+'년 ':'')+mdw(d);
+  $('dateRel').textContent=diff===0?'오늘':(diff>0?diff+'일 뒤':(-diff)+'일 전');
   if($('dateIn').value!==d)$('dateIn').value=d;
 }
 function renderSummary(){
   var el=$('summary');
   if(!state.loaded||!state.people.length){el.hidden=true;return}
   el.hidden=false;
-  var cnt={good:0,mid:0,bad:0},crit=0,born=0;
-  state.people.forEach(function(p){var c=calc(p.birth,state.date);if(!c)return;born++;cnt[overallOf(c.mean)]++;if(c.anyCrit)crit++});
-  var pr=pairsFor(state.date),hi=pr.filter(function(x){return x.info.lvl===2}).length,lo=pr.length-hi;
+  var cnt={good:0,mid:0,bad:0},crit=0;
+  state.people.forEach(function(p){var c=calc(p.birth,state.date);if(!c)return;cnt[overallOf(c.mean)]++;if(c.anyCrit)crit++});
   el.innerHTML=
-    '<span class="sm"><i class="dot good"></i>종합 좋음 <b>'+cnt.good+'</b></span>'+
-    '<span class="sm"><i class="dot mid"></i>보통 <b>'+cnt.mid+'</b></span>'+
-    '<span class="sm"><i class="dot bad"></i>나쁨 <b>'+cnt.bad+'</b></span>'+
-    '<span class="sm">위험일 있는 사람 <b>'+crit+'</b></span>'+
-    '<span class="sm">충돌 주의 <b>'+pr.length+'</b>쌍'+(pr.length?' (높음 '+hi+', 주의 '+lo+')':'')+'</span>'+clashSummary();
+    '<span class="sm" title="종합 좋음"><i class="dot good"></i>좋음 <b>'+cnt.good+'</b></span>'+
+    '<span class="sm" title="종합 보통"><i class="dot mid"></i>보통 <b>'+cnt.mid+'</b></span>'+
+    '<span class="sm" title="종합 나쁨"><i class="dot bad"></i>나쁨 <b>'+cnt.bad+'</b></span>'+
+    (crit?'<span class="sm" title="위험일이 있는 사람">위험일 <b>'+crit+'</b></span>':'');
+}
+function miniLine(c){
+  return ['p','e','i'].map(function(k){
+    return '<span class="ml '+stateOf(c.v[k],c.c[k])+'">'+CN[k].name+' '+fmtPct(c.v[k])+'</span>';
+  }).join('');
 }
 function renderPairs(){
-  var el=$('pairs');
-  if(!state.loaded){el.innerHTML='<p class="calm">불러오는 중입니다.</p>';return}
-  if(state.people.length<2){el.innerHTML='<p class="calm">조합을 비교하려면 2명 이상 등록해 주세요.</p>';return}
+  var el=$('pairs'),ct=$('ctPairs');
+  if(!state.loaded){ct.textContent='';el.innerHTML='<p class="calm">불러오는 중입니다.</p>';return}
+  if(state.people.length<2){ct.textContent='';el.innerHTML='<p class="calm">조합을 비교하려면 2명 이상 등록해 주세요.</p>';return}
   var pr=pairsFor(state.date);
-  if(!pr.length){el.innerHTML='<p class="calm">'+md(state.date)+'에는 감성이 함께 가라앉는 조합이 없어 눈에 띄는 충돌 위험이 없습니다.</p>';return}
-  el.innerHTML='<div class="pairs">'+pr.map(function(x){
+  if(!pr.length){ct.textContent='없음';el.innerHTML='<p class="calm">'+md(state.date)+'에는 눈에 띄는 충돌 조합이 없습니다.</p>';return}
+  var hi=pr.filter(function(x){return x.info.lvl===2}).length;
+  ct.textContent=pr.length+'쌍'+(hi?' · 높음 '+hi:'');
+  el.innerHTML='<p class="pnote">높음은 협의를 미루고, 주의는 말투를 조심하세요.</p><div class="pairs">'+pr.map(function(x){
     var l=x.info.lvl;
-    var line=x.info.gapOnly
-      ?esc(x.a.name)+': '+emoDesc(x.ca)+' · '+esc(x.b.name)+': '+emoDesc(x.cb)
-      :esc(x.a.name)+'('+strain(x.ca)+') · '+esc(x.b.name)+'('+strain(x.cb)+')';
-    var tired='';
-    var advice=l===2?'같은 자리에서 의견이 갈리면 감정이 커지기 쉽습니다. 지적과 부탁은 짧게 하고 중요한 협의는 다른 날로 옮기세요.'
-      :(x.info.gapOnly?'한 사람은 기분이 올라 있고 다른 사람은 가라앉아 있어 같은 말도 다르게 들릴 수 있습니다.':'말투가 날카로워질 수 있습니다. 같은 일을 맡기기보다 자리를 나누는 편이 안전합니다.');
     return '<article class="pair l'+l+'">'+
-      '<div class="phead"><span class="lvl l'+l+'">'+(l===2?'높음':'주의')+'</span><h3>'+esc(x.a.name)+' <span class="x">×</span> '+esc(x.b.name)+'</h3></div>'+
-      '<div class="pbars">'+
-        '<div class="pb"><span class="pn">'+esc(x.a.name)+'</span>'+miniRows(x.ca)+'</div>'+
-        '<div class="pb"><span class="pn">'+esc(x.b.name)+'</span>'+miniRows(x.cb)+'</div>'+
-      '</div>'+
-      '<p class="pwhy">'+line+'. '+advice+tired+'</p></article>';
+      '<div class="phead"><span class="lvl l'+l+'">'+(l===2?'높음':'주의')+'</span><h3>'+esc(x.a.name)+' <span class="x">×</span> '+esc(x.b.name)+'</h3>'+(x.info.gapOnly?'<span class="tag">기분 엇갈림</span>':'')+'</div>'+
+      '<div class="pl"><b>'+esc(x.a.name)+'</b>'+miniLine(x.ca)+'</div>'+
+      '<div class="pl"><b>'+esc(x.b.name)+'</b>'+miniLine(x.cb)+'</div></article>';
   }).join('')+'</div>';
+}
+function watchMap(){
+  var pr=pairsFor(state.date),w={};
+  pr.forEach(function(x){
+    (w[x.a.id]=w[x.a.id]||[]).push({n:x.b.name,l:x.info.lvl});
+    (w[x.b.id]=w[x.b.id]||[]).push({n:x.a.name,l:x.info.lvl});
+  });
+  return w;
+}
+function mcell(k,c){
+  var v=c.v[k],crit=c.c[k],st=stateOf(v,crit),pct=Math.round(Math.abs(v)*50);
+  var pos=v>=0?'left:50%;width:'+pct+'%':'right:50%;width:'+pct+'%';
+  return '<span class="mc '+st+'"><span class="mv">'+fmtPct(v)+'</span><span class="mb"><i class="'+CN[k].cls+'" style="'+pos+'"></i></span></span>';
+}
+function mrowHTML(p,watch,open){
+  var c=calc(p.birth,state.date),ov=c?overallOf(c.mean):'';
+  var w=(watch[p.id]||[]).slice().sort(function(a,b){return b.l-a.l}),top=w.length?w[0].l:0;
+  var nm='<span class="mn2"><span class="mnm">'+(c?'<i class="dot '+ov+'" aria-hidden="true"></i>':'')+(top?'<span class="wm w'+top+'" aria-hidden="true">'+TRI+'</span>':'')+'<span class="t">'+esc(p.name)+'</span></span>';
+  var head='<button type="button" class="mrow" data-open="'+esc(p.id)+'" aria-expanded="'+open+'"';
+  if(!c)return head+' aria-label="'+esc(p.name)+', 이 날짜에는 태어나기 전">'+nm+'<span class="mov">태어나기 전</span></span><span class="mna">계산하지 않음</span></button>';
+  var label=p.name+', 종합 '+SL[ov]+(top?', 충돌 주의 '+(top===2?'높음':'주의'):'')+', '+ORDER.map(function(k){return CN[k].name+' '+fmtPct(c.v[k])+' '+SL[stateOf(c.v[k],c.c[k])]}).join(', ');
+  return head+' aria-label="'+esc(label)+'">'+nm+'</span>'+
+    mcell('p',c)+mcell('e',c)+mcell('i',c)+'<span aria-hidden="true"></span>'+mcell('n',c)+mcell('a',c)+mcell('s',c)+'</button>';
+}
+function cardHTML(p,watch){
+  var c=calc(p.birth,state.date),h='<article class="pcard'+(p.id===chartPid()?' sel':'')+'" data-id="'+esc(p.id)+'">';
+  if(state.editId===p.id){
+    return h+'<form class="eform" data-id="'+esc(p.id)+'" novalidate>'+
+      '<div class="fld"><label for="en-'+esc(p.id)+'">이름</label><input id="en-'+esc(p.id)+'" name="name" type="text" maxlength="20" value="'+esc(p.name)+'" autocomplete="off"></div>'+
+      '<div class="fld"><label for="eb-'+esc(p.id)+'-y">생년월일</label><div class="ymd">'+ymdInner('eb-'+p.id,p.birth)+'</div></div>'+
+      '<p class="err" role="alert" hidden></p>'+
+      '<div class="pact"><button class="btn primary small" type="submit">저장</button><button class="btn small" type="button" data-act="cancel">취소</button></div></form></article>';
+  }
+  h+='<div class="ptop"><div class="pname"><h3>'+esc(p.name)+'</h3>'+(p.example?'<span class="tag">예시</span>':'')+'</div>';
+  if(c){var ov=overallOf(c.mean);h+='<span class="pill '+ov+'">종합 '+SL[ov]+'</span>'}
+  h+='</div><div class="pmeta">'+birthKo(p.birth)+(c?' · 태어난 지 '+thou(c.d)+'일째':'')+'</div>';
+  if(c){
+    h+='<div class="gauges">'+gaugeRow('p',c)+gaugeRow('e',c)+gaugeRow('i',c)+'<p class="glab">확장 리듬</p>'+gaugeRow('n',c)+gaugeRow('a',c)+gaugeRow('s',c)+'</div>';
+    var icn=innerClash(c).length;
+    if(icn)h+='<p class="innote">리듬 엇갈림 '+icn+'건 (위의 ‘리듬 충돌’에서 확인)</p>';
+    var w=(watch[p.id]||[]).slice().sort(function(a,b){return b.l-a.l});
+    if(w.length){
+      h+='<p class="watch w'+w[0].l+'">'+TRI+'<span>조심: '+w.map(function(x){return esc(x.n)+(x.l===2?' (높음)':' (주의)')}).join(', ')+'</span></p>';
+    }else{
+      h+='<p class="watch w0">이 날은 부딪칠 조합이 없습니다.</p>';
+    }
+  }else{
+    h+='<p class="watch w0">이 날짜에는 아직 태어나기 전이라 계산하지 않습니다.</p>';
+  }
+  h+='<div class="pact">';
+  if(state.delId===p.id){
+    h+='<span class="ask">삭제할까요?</span><button class="btn danger small" type="button" data-act="delyes">삭제</button><button class="btn small" type="button" data-act="delno">취소</button>';
+  }else{
+    h+='<button class="btn small" type="button" data-act="chart">곡선 보기</button><button class="btn small" type="button" data-act="edit">수정</button><button class="btn small" type="button" data-act="del">삭제</button>';
+  }
+  return h+'</div></article>';
 }
 function renderBoard(){
   var el=$('board');
+  $('ctBoard').textContent=state.loaded?state.people.length+'명 · 눌러서 상세':'';
   if(!state.loaded){el.innerHTML='<p class="calm">불러오는 중입니다.</p>';return}
   if(!state.people.length){
-    el.innerHTML='<div class="empty"><p>등록된 사람이 없습니다. 아래 ‘사람 추가’에서 이름과 생년월일을 넣거나, 예시 인원으로 먼저 살펴보세요.</p><button id="loadEx" class="btn" type="button">예시 인원 불러오기</button></div>';
+    el.innerHTML='<div class="empty"><p>등록된 사람이 없습니다. ‘사람 추가’에서 이름과 생년월일을 넣거나 예시 인원으로 먼저 살펴보세요.</p><button id="loadEx" class="btn" type="button">예시 인원 불러오기</button></div>';
     return;
   }
-  var pr=pairsFor(state.date),watch={};
-  pr.forEach(function(x){
-    (watch[x.a.id]=watch[x.a.id]||[]).push({n:x.b.name,l:x.info.lvl});
-    (watch[x.b.id]=watch[x.b.id]||[]).push({n:x.a.name,l:x.info.lvl});
+  var watch=watchMap(),hasEx=state.people.some(function(p){return p.example});
+  var h='<div class="mtool">'+(hasEx?'<span class="exnote">예시 인원 포함 <button id="clearEx" class="btn small" type="button">예시 지우기</button></span>':'')+
+    '<span class="mlegend">푸른 좋음 · 붉은 나쁨 · 빗금 위험일</span><button type="button" class="btn small" data-ea="1" aria-pressed="'+state.expAll+'">모두 펼치기</button></div>';
+  h+='<div class="mhead" aria-hidden="true"><span></span>'+
+    ['p','e','i'].map(function(k){return '<span class="mh"><i class="rdot rd-'+CN[k].cls+'"></i>'+CN[k].name+'</span>'}).join('')+'<span></span>'+
+    EXTK.map(function(k){return '<span class="mh"><i class="rdot rd-'+CN[k].cls+'"></i>'+CN[k].name+'</span>'}).join('')+'</div>';
+  state.people.forEach(function(p){
+    var open=state.expAll||state.openId===p.id||state.editId===p.id;
+    h+=mrowHTML(p,watch,open);
+    if(open)h+=cardHTML(p,watch);
   });
-  var hasEx=state.people.some(function(p){return p.example});
-  var html='';
-  if(hasEx)html+='<div class="exnote"><span>예시 인원이 들어 있습니다. 실제 인원을 추가한 뒤 지워 주세요.</span><button id="clearEx" class="btn small" type="button">예시 지우기</button></div>';
-  html+='<div class="cards">'+state.people.map(function(p){
-    var c=calc(p.birth,state.date),h='<article class="pcard'+(p.id===chartPid()?' sel':'')+'" data-id="'+esc(p.id)+'">';
-    if(state.editId===p.id){
-      return h+'<form class="eform" data-id="'+esc(p.id)+'" novalidate>'+
-        '<div class="fld"><label for="en-'+esc(p.id)+'">이름</label><input id="en-'+esc(p.id)+'" name="name" type="text" maxlength="20" value="'+esc(p.name)+'" autocomplete="off"></div>'+
-        '<div class="fld"><label for="eb-'+esc(p.id)+'">생년월일</label><input id="eb-'+esc(p.id)+'" name="birth" type="date" value="'+esc(p.birth)+'"></div>'+
-        '<p class="err" role="alert" hidden></p>'+
-        '<div class="pact"><button class="btn primary small" type="submit">저장</button><button class="btn small" type="button" data-act="cancel">취소</button></div></form></article>';
-    }
-    h+='<div class="ptop"><div class="pname"><h3>'+esc(p.name)+'</h3>'+(p.example?'<span class="tag">예시</span>':'')+'</div>';
-    if(c){var ov=overallOf(c.mean);h+='<span class="pill '+ov+'">종합 '+SL[ov]+'</span>'}
-    h+='</div><div class="pmeta">'+birthKo(p.birth)+(c?' · 태어난 지 '+thou(c.d)+'일째':'')+'</div>';
-    if(c){
-      h+='<div class="gauges">'+gaugeRow('p',c)+gaugeRow('e',c)+gaugeRow('i',c)+'<p class="glab">확장 리듬</p>'+gaugeRow('n',c)+gaugeRow('a',c)+gaugeRow('s',c)+'</div>';
-      var icn=innerClash(c).length;
-      if(icn)h+='<p class="innote">리듬 엇갈림 '+icn+'건 (위의 \u2018리듬 충돌\u2019에서 확인)</p>';
-      var w=(watch[p.id]||[]).slice().sort(function(a,b){return b.l-a.l});
-      if(w.length){
-        var top=w[0].l;
-        h+='<p class="watch w'+top+'">'+TRI+'<span>조심: '+w.map(function(x){return esc(x.n)+(x.l===2?' (높음)':' (주의)')}).join(', ')+'</span></p>';
-      }else{
-        h+='<p class="watch w0">이 날은 부딪칠 조합이 없습니다.</p>';
-      }
-    }else{
-      h+='<p class="watch w0">이 날짜에는 아직 태어나기 전이라 계산하지 않습니다.</p>';
-    }
-    h+='<div class="pact">';
-    if(state.delId===p.id){
-      h+='<span class="ask">삭제할까요?</span><button class="btn danger small" type="button" data-act="delyes">삭제</button><button class="btn small" type="button" data-act="delno">취소</button>';
-    }else{
-      h+='<button class="btn small" type="button" data-act="chart">곡선 보기</button><button class="btn small" type="button" data-act="edit">수정</button><button class="btn small" type="button" data-act="del">삭제</button>';
-    }
-    return h+'</div></article>';
-  }).join('')+'</div>';
-  el.innerHTML=html;
+  el.innerHTML=h;
   if(state.focusEdit){state.focusEdit=false;var f=el.querySelector('.eform input');if(f)f.focus()}
+  if(state.focusRow){var r=el.querySelector('.mrow[data-open="'+state.focusRow+'"]');state.focusRow=null;if(r)r.focus()}
 }
 function chartPid(){
   if(!state.people.length)return null;
@@ -643,7 +805,7 @@ function drawChart(){
   var host=$('chartHost');if(!host)return;
   if(!state.loaded||!state.people.length){host.innerHTML='<p class="calm" style="border:0">사람을 등록하면 곡선이 나타납니다.</p>';return}
   var w=Math.floor(host.clientWidth)||340;if(w<260)w=260;
-  var h=w<480?250:290,L=38,R=18,T=14,B=26,pw=w-L-R,ph=h-T-B,T0=-10,T1=20;
+  var h=w<480?170:230,L=36,R=16,T=10,B=22,pw=w-L-R,ph=h-T-B,T0=-10,T1=20;
   var X=function(t){return L+(t-T0)/(T1-T0)*pw};
   var Y=function(v){return T+(1-v)/2*ph};
   var d0n=dayNum(state.date),t,s,k;
@@ -704,7 +866,7 @@ function drawChart(){
 }
 function renderHeat(){
   var el=$('heat'),info=$('heatInfo');
-  if(!state.loaded||!state.people.length){el.innerHTML='';info.textContent='사람을 등록하면 앞으로 14일의 컨디션과 충돌 주의 날이 표시됩니다.';return}
+  if(!state.loaded||!state.people.length){el.innerHTML='';$('ctHeat').textContent='';info.textContent='사람을 등록하면 앞으로 14일의 컨디션과 충돌 주의 날이 표시됩니다.';return}
   var days=[],i;for(i=0;i<14;i++)days.push(addDays(state.date,i));
   var perDay=days.map(function(d){return pairsFor(d)});
   var best=-1,bestScore=0;
@@ -714,9 +876,9 @@ function renderHeat(){
   });
   if(best>=0){
     var pr=perDay[best],hi=pr.filter(function(x){return x.info.lvl===2}).length;
-    info.innerHTML='가장 조심할 날은 <b>'+mdw(days[best])+'</b>입니다. 높음 '+hi+'쌍, 주의 '+(pr.length-hi)+'쌍.';
+    info.innerHTML='가장 조심할 날 <b>'+mdw(days[best])+'</b> \u00B7 높음 '+hi+'쌍, 주의 '+(pr.length-hi)+'쌍';$('ctHeat').textContent=(+days[best].slice(5,7))+'/'+(+days[best].slice(8,10))+' 조심';
   }else{
-    info.textContent='앞으로 14일 동안 눈에 띄는 충돌 주의 조합은 없습니다.';
+    info.textContent='앞으로 14일 동안 눈에 띄는 충돌 주의 조합은 없습니다.';$('ctHeat').textContent='이상 없음';
   }
   var h='<span></span>';
   days.forEach(function(d,idx){
@@ -744,12 +906,22 @@ function renderHeat(){
   el.innerHTML=h;
 }
 function renderSaveNote(){
-  $('saveNote').textContent=state.mode==='db'
-    ?'등록한 사람은 이 페이지에 저장되어 다른 기기에서도 같은 명단이 보입니다. 생년월일이 함께 저장되니 페이지를 공유할 때 주의하세요.'
-    :'이 기기의 브라우저에만 저장됩니다. 브라우저 데이터를 지우면 명단도 사라집니다.';
+  var el=$('saveNote'),n=state.people.filter(function(p){return !p.example}).length,t='',d;
+  $('ctAdd').textContent=n+'명';
+  if(state.mode==='db'){
+    el.textContent='등록한 사람은 이 페이지에 저장되어 다른 기기에서도 보입니다. 페이지를 공유하면 생년월일도 함께 보이니 주의하세요.';
+    return;
+  }
+  if(!state.saveOk){
+    el.innerHTML='<b class="sv bad">저장 안 됨</b> 이 브라우저에서는 저장이 막혀 새로고침하면 사라집니다. ‘백업 내려받기’로 보관하세요.';
+    return;
+  }
+  if(state.savedAt){d=state.savedAt;t=' · '+pad(d.getHours())+':'+pad(d.getMinutes())}
+  el.innerHTML='<b class="sv ok">저장됨</b> 이 기기 브라우저 · '+n+'명'+t+'. 브라우저 데이터를 지우면 사라지니 백업을 따로 보관하세요.';
 }
 function render(){
   renderDate();renderSummary();renderPairs();renderClash();renderBoard();renderChartCtl();drawChart();renderHeat();renderSaveNote();
+  if(state.loaded&&!state.people.length&&!state.addOpened){state.addOpened=true;$('secAdd').open=true}
 }
 
 /* ---------- rhythm clashes ---------- */
@@ -779,13 +951,14 @@ function clashSummary(){
   return '<span class="sm">리듬 충돌 <b>'+d.nb+'</b>건(사람 사이) · <b>'+d.ni+'</b>건(한 사람 안)</span>';
 }
 function renderClash(){
-  var ctl=$('clashCtl'),el=$('clash');
+  var ctl=$('clashCtl'),el=$('clash'),ct=$('ctClash');
   if(!state.loaded||state.people.length<1){
-    ctl.innerHTML='';
+    ct.textContent='';ctl.innerHTML='';
     el.innerHTML='<p class="calm">'+(state.loaded?'사람을 등록하면 리듬 충돌이 표시됩니다.':'불러오는 중입니다.')+'</p>';
     return;
   }
   var d=clashData(state.date),h;
+  ct.textContent=d.nb+' · '+d.ni+'건';
   ctl.innerHTML='<div class="ctl"><div class="seg" role="group" aria-label="충돌 종류">'+
     '<button type="button" data-km="between" aria-pressed="'+(state.clashMode==='between')+'">사람 사이 '+d.nb+'</button>'+
     '<button type="button" data-km="inner" aria-pressed="'+(state.clashMode==='inner')+'">한 사람 안 '+d.ni+'</button></div></div>';
@@ -796,24 +969,52 @@ function renderClash(){
     ORDER.forEach(function(k){
       var L=d.between[k];
       if(!L.length)return;
-      h+='<article class="cgrp"><div class="cgh"><i class="rdot rd-'+CN[k].cls+'"></i><h3>'+CN[k].name+' 리듬</h3><span class="tag">'+(EXTK.indexOf(k)<0?'기본':'확장')+'</span><span class="cgc">'+L.length+'쌍</span></div>'+
-        '<p class="cgm">'+MEAN[k]+'</p><ul class="cls">'+
-        L.slice(0,4).map(function(r){
+      h+='<article class="cgrp"><div class="cgh"><i class="rdot rd-'+CN[k].cls+'"></i><h3 title="'+esc(MEAN[k])+'">'+CN[k].name+' 리듬</h3><span class="tag">'+(EXTK.indexOf(k)<0?'기본':'확장')+'</span><span class="cgc">'+L.length+'쌍</span></div>'+
+        '<ul class="cls">'+
+        L.slice(0,3).map(function(r){
           return '<li class="cl"><b class="chip good">'+esc(r.good.name)+' '+fmtPct(r.gv)+'</b><span class="x">↔</span><b class="chip bad">'+esc(r.bad.name)+' '+fmtPct(r.bv)+'</b><span class="lvl l'+r.lvl+'">'+(r.lvl===2?'강함':'주의')+'</span></li>';
-        }).join('')+'</ul>'+(L.length>4?'<p class="cgm">외 '+(L.length-4)+'쌍</p>':'')+'</article>';
+        }).join('')+'</ul>'+(L.length>3?'<p class="cgm">외 '+(L.length-3)+'쌍</p>':'')+'</article>';
     });
     el.innerHTML=h+'</div>';
   }else{
     if(!d.ni){el.innerHTML='<p class="calm">'+md(state.date)+'에는 한 사람 안에서 서로 반대로 움직이는 리듬이 없습니다.</p>';return}
     el.innerHTML='<div class="clgrid">'+d.inner.map(function(x){
       return '<article class="cgrp"><div class="cgh"><h3>'+esc(x.p.name)+'</h3><span class="cgc">'+x.list.length+'건</span></div><ul class="cls">'+
-        x.list.slice(0,4).map(function(r){
+        x.list.slice(0,2).map(function(r,ri){
           return '<li class="cl"><b class="chip good">'+CN[r.hi].name+' '+fmtPct(x.c.v[r.hi])+'</b><span class="x">↔</span><b class="chip bad">'+CN[r.lo].name+' '+fmtPct(x.c.v[r.lo])+'</b>'+
-            '<span class="lvl l'+(r.gap>=1.5?2:1)+'">'+(r.gap>=1.5?'강함':'주의')+'</span><span class="rm">'+(INNER[r.hi+r.lo]||'서로 반대로 움직이는 날입니다.')+'</span></li>';
-        }).join('')+'</ul>'+(x.list.length>4?'<p class="cgm">외 '+(x.list.length-4)+'건</p>':'')+'</article>';
+            '<span class="lvl l'+(r.gap>=1.5?2:1)+'">'+(r.gap>=1.5?'강함':'주의')+'</span>'+(ri===0?'<span class="rm">'+(INNER[r.hi+r.lo]||'서로 반대로 움직이는 날입니다.')+'</span>':'')+'</li>';
+        }).join('')+'</ul>'+(x.list.length>2?'<p class="cgm">외 '+(x.list.length-2)+'건</p>':'')+'</article>';
     }).join('')+'</div>';
   }
 }
+
+/* ---------- birth date: year, month, day selects ---------- */
+function dim(y,m){return new Date(Date.UTC(y,m,0)).getUTCDate()}
+function dayOpts(y,m,sel){var n=(y&&m)?dim(y,m):31,h='';for(var d=1;d<=n;d++)h+='<option value="'+d+'"'+(d===sel?' selected':'')+'>'+d+'</option>';return h}
+function ymdInner(id,val){
+  var mm=/^(\d{4})-(\d{2})-(\d{2})$/.exec(val||''),y0=mm?+mm[1]:0,m0=mm?+mm[2]:0,d0=mm?+mm[3]:0,e=esc(id),cy=+todayStr().slice(0,4),h,y,i;
+  h='<select id="'+e+'-y" class="ymd-y" aria-label="태어난 해"><option value="">년</option>';
+  for(y=cy;y>=1900;y--)h+='<option value="'+y+'"'+(y===y0?' selected':'')+'>'+y+'</option>';
+  h+='</select><span class="ymd-s">년</span><select id="'+e+'-m" class="ymd-m" aria-label="태어난 달"><option value="">월</option>';
+  for(i=1;i<=12;i++)h+='<option value="'+i+'"'+(i===m0?' selected':'')+'>'+i+'</option>';
+  h+='</select><span class="ymd-s">월</span><select id="'+e+'-d" class="ymd-d" aria-label="태어난 날"><option value="">일</option>'+dayOpts(y0,m0,d0)+'</select><span class="ymd-s">일</span>';
+  return h;
+}
+function readYmd(id){
+  var y=$(id+'-y'),m=$(id+'-m'),d=$(id+'-d');
+  if(!y||!y.value||!m.value||!d.value)return '';
+  return y.value+'-'+pad(+m.value)+'-'+pad(+d.value);
+}
+function fixDays(id){
+  var y=+$(id+'-y').value,m=+$(id+'-m').value,ds=$(id+'-d'),cur=+ds.value,n=(y&&m)?dim(y,m):31;
+  ds.innerHTML='<option value="">일</option>'+dayOpts(y,m,cur&&cur<=n?cur:0);
+  if(!(cur&&cur<=n))ds.value='';
+}
+function resetYmd(id){$(id+'-y').value='';$(id+'-m').value='';fixDays(id);$(id+'-d').value=''}
+document.addEventListener('change',function(e){
+  var t=e.target;
+  if(t&&t.classList&&(t.classList.contains('ymd-y')||t.classList.contains('ymd-m')))fixDays(t.id.slice(0,-2));
+});
 
 /* ---------- events ---------- */
 function setDate(d){if(isFinite(dayNum(d))){state.date=d;state.delId=null;render()}}
@@ -821,31 +1022,33 @@ $('prev').addEventListener('click',function(){setDate(addDays(state.date,-1))});
 $('next').addEventListener('click',function(){setDate(addDays(state.date,1))});
 $('today').addEventListener('click',function(){setDate(todayStr())});
 $('dateIn').addEventListener('change',function(e){if(e.target.value)setDate(e.target.value)});
+$('dateIn').addEventListener('click',function(e){try{if(e.target.showPicker)e.target.showPicker()}catch(x){}});
+$('secChart').addEventListener('toggle',function(){if(this.open)drawChart()});
 
 function checkInput(name,birth){
   name=(name||'').trim();
   if(!name)return '이름을 입력해 주세요.';
-  if(!/^\d{4}-\d{2}-\d{2}$/.test(birth||'')||!isFinite(dayNum(birth)))return '생년월일을 선택해 주세요.';
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(birth||'')||!isFinite(dayNum(birth)))return '생년월일을 년·월·일까지 모두 선택해 주세요.';
   if(birth<'1900-01-01')return '1900년 이후 날짜를 입력해 주세요.';
   if(birth>todayStr())return '생년월일은 오늘 이전이어야 합니다.';
   return '';
 }
 $('addForm').addEventListener('submit',function(e){
   e.preventDefault();
-  var n=$('addName').value,b=$('addBirth').value,err=$('addErr'),msg=checkInput(n,b);
+  var n=$('addName').value,b=readYmd('addBirth'),err=$('addErr'),msg=checkInput(n,b);
   if(!msg&&state.people.length>=MAXP)msg='등록은 '+MAXP+'명까지 가능합니다.';
   if(msg){err.textContent=msg;err.hidden=false;return}
   err.hidden=true;
   addPerson(n.trim(),b,false).then(function(ok){
     if(ok===false)return;
-    $('addName').value='';$('addBirth').value='';toast(n.trim()+' 님을 추가했습니다.');
+    $('addName').value='';resetYmd('addBirth');toast(n.trim()+' 님을 추가했습니다.');
   });
 });
 document.addEventListener('submit',function(e){
   var f=e.target;
   if(!f.classList||!f.classList.contains('eform'))return;
   e.preventDefault();
-  var n=f.elements.name.value,b=f.elements.birth.value,msg=checkInput(n,b),er=f.querySelector('.err');
+  var id0=f.getAttribute('data-id'),n=f.elements.name.value,b=readYmd('eb-'+id0),msg=checkInput(n,b),er=f.querySelector('.err');
   if(msg){er.textContent=msg;er.hidden=false;return}
   var id=f.getAttribute('data-id');
   state.editId=null;
@@ -857,6 +1060,9 @@ document.addEventListener('click',function(e){
   if(!t.closest)return;
   var b=t.closest('button');
   if(b){
+    var op=b.getAttribute('data-open');
+    if(op){state.openId=state.openId===op?null:op;state.delId=null;state.focusRow=op;renderBoard();return}
+    if(b.hasAttribute('data-ea')){state.expAll=!state.expAll;renderBoard();return}
     var act=b.getAttribute('data-act');
     if(act){
       var card=b.closest('.pcard'),id=card&&card.getAttribute('data-id');
@@ -868,6 +1074,7 @@ document.addEventListener('click',function(e){
       else if(act==='chart'){
         state.chartMode='person';state.chartPerson=id;render();
         var rm=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        $('secChart').open=true;drawChart();
         $('hChart').scrollIntoView({behavior:rm?'auto':'smooth',block:'start'});
       }
       return;
@@ -899,25 +1106,60 @@ document.addEventListener('click',function(e){
 document.addEventListener('change',function(e){
   if(e.target&&e.target.id==='chartPerson'){state.chartPerson=e.target.value;renderBoard();drawChart()}
 });
+$('expBtn').addEventListener('click',function(){
+  var list=state.people.filter(function(p){return !p.example}).map(function(p){return {name:p.name,birth:p.birth}});
+  if(!list.length){toast('백업할 사람이 없습니다. 예시 인원은 백업하지 않습니다.');return}
+  try{
+    var blob=new Blob([JSON.stringify({app:'biorhythm-board',version:1,people:list},null,1)],{type:'application/json'});
+    var url=URL.createObjectURL(blob),a=document.createElement('a');
+    a.href=url;a.download='biorhythm-people-'+todayStr()+'.json';
+    document.body.appendChild(a);a.click();document.body.removeChild(a);
+    setTimeout(function(){URL.revokeObjectURL(url)},2000);
+    toast(list.length+'명을 파일로 내려받았습니다.');
+  }catch(e){toast('내려받기에 실패했습니다.')}
+});
+$('impBtn').addEventListener('click',function(){$('impFile').click()});
+$('impFile').addEventListener('change',function(e){
+  var f=e.target.files&&e.target.files[0];
+  e.target.value='';
+  if(!f)return;
+  var r=new FileReader();
+  r.onload=function(){
+    var data;
+    try{data=JSON.parse(String(r.result))}catch(x){toast('백업 파일을 읽지 못했습니다.');return}
+    var arr=Array.isArray(data)?data:(data&&Array.isArray(data.people)?data.people:null);
+    if(!arr){toast('백업 파일 형식이 맞지 않습니다.');return}
+    var have={},add=[],skip=0,bad=0;
+    state.people.forEach(function(p){have[p.name+'|'+p.birth]=1});
+    arr.forEach(function(x){
+      if(!x||typeof x.name!=='string'||typeof x.birth!=='string'){bad++;return}
+      var nm=x.name.trim().slice(0,20);
+      if(checkInput(nm,x.birth)){bad++;return}
+      var key=nm+'|'+x.birth;
+      if(have[key]){skip++;return}
+      have[key]=1;add.push({name:nm,birth:x.birth});
+    });
+    var room=Math.max(MAXP-state.people.length,0);
+    if(add.length>room){bad+=add.length-room;add=add.slice(0,room)}
+    seq(add,function(x){return addPerson(x.name,x.birth,false)}).then(function(){
+      toast(add.length+'명을 불러왔습니다'+(skip?' (중복 '+skip+'명 제외)':'')+(bad?' (읽지 못한 항목 '+bad+')':'')+'.');
+    });
+  };
+  r.onerror=function(){toast('백업 파일을 읽지 못했습니다.')};
+  r.readAsText(f);
+});
 var rsT=null,lastW=0;
 window.addEventListener('resize',function(){
   clearTimeout(rsT);
   rsT=setTimeout(function(){var w=$('chartHost').clientWidth;if(w!==lastW){lastW=w;drawChart()}},120);
 });
 
-/* header trace: the three real periods, drawn from day 0 */
 (function(){
-  var span=40,W=660,H=60,svg=$('trace'),cls=['tp','tp','te','ti'],out='';
-  [[23,'tp'],[28,'te'],[33,'ti'],[38,'tn'],[43,'ta'],[53,'ts']].forEach(function(c){
-    var d='';
-    for(var t=0;t<=span;t+=0.5){var x=t/span*W,y=H/2-Math.sin(2*Math.PI*t/c[0])*(H/2-4);d+=(t===0?'M':'L')+x.toFixed(1)+' '+y.toFixed(1)}
-    out+='<path class="'+c[1]+'" d="'+d+'"/>';
-  });
-  svg.innerHTML=out;
   var ai=document.querySelector('link[rel="apple-touch-icon"]');
   if(ai&&ai.href)$('logo').src=ai.href;
 })();
 
+$('addBirthBox').innerHTML=ymdInner('addBirth','');
 render();
 initStore();
 })();
