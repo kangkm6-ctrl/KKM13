@@ -372,11 +372,23 @@ h1{font-size:18px;line-height:1.1;white-space:nowrap}
 .tag.sit{color:var(--fg);border-color:var(--cg2);font:500 11px/1 var(--body);padding:3px 6px}
 .ptip{font-size:12px;margin-top:1px}
 .ptip b{color:var(--muted);font-weight:600;margin-right:6px}
+.me{display:inline-block;flex:none;font:700 10.5px/1 var(--body);padding:3px 5px;border-radius:4px;background:var(--fg);color:var(--bg);letter-spacing:0}
+.sm.mine{font-weight:600}
+.hn .me{margin-right:3px}
+.refsel{display:inline-flex;align-items:center;gap:4px;margin-left:8px}
+.refsel .rl{font:700 11px/1 var(--body);color:var(--muted)}
+.refsel select{font:500 13px/1 var(--body);max-width:110px;min-height:28px;padding:0 4px;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--fg)}
+.mrow.isme{box-shadow:inset 3px 0 0 var(--fg)}
 .mtool{flex-wrap:wrap}
 .mtool .mlegend{flex:1 1 0;min-width:0}
 .mtool>.btn{white-space:nowrap;flex:none}
 .mtool .exnote{flex:1 1 100%;display:flex;flex-wrap:nowrap;align-items:center;justify-content:space-between;padding:2px 8px}
 .mtool .exnote .btn{margin-left:0;min-height:24px;padding:0 8px;white-space:nowrap}
+.pair{grid-template-columns:minmax(0,1fr) minmax(88px,28%);align-items:stretch;gap:8px}
+.pmain{display:grid;gap:3px;min-width:0;align-content:start}
+.pair .ptip{display:flex;flex-direction:column;gap:3px;margin:0;padding:6px 8px;border-left:2px solid var(--line);background:var(--grid);border-radius:0 6px 6px 0;font-size:12px;line-height:1.4;justify-content:center;word-break:keep-all}
+.pair .ptip b{margin:0;font-size:11px}
+.pair.l2 .ptip{border-left-color:var(--bad)} .pair.l1 .ptip{border-left-color:var(--warn)}
 </style>
 
 <style>body{margin:0}[hidden]{display:none!important}</style>
@@ -396,12 +408,12 @@ h1{font-size:18px;line-height:1.1;white-space:nowrap}
   </div>
 
   <details class="sec" id="secPairs" open>
-    <summary><h2 id="hPairs">서로 조심할 조합</h2><span id="ctPairs" class="ct"></span></summary>
+    <summary><h2 id="hPairs">서로 조심할 조합</h2><span id="refSel" class="refsel" hidden></span><span id="ctPairs" class="ct"></span></summary>
     <div class="body"><div id="pairs"></div></div>
   </details>
 
   <details class="sec" id="secClash">
-    <summary><h2 id="hClash">리듬 충돌</h2><span id="ctClash" class="ct"></span></summary>
+    <summary><h2 id="hClash">기준 사람의 리듬 충돌</h2><span id="ctClash" class="ct"></span></summary>
     <div class="body"><div id="clashCtl"></div><div id="clash"></div></div>
   </details>
 
@@ -611,15 +623,47 @@ function removePerson(id){
   state.people=state.people.filter(function(p){return p.id!==id});
   lsSave();render();return Promise.resolve();
 }
+function setMe(id){
+  var p=state.people.filter(function(x){return x.id===id})[0];
+  if(!p||isMe(p))return;
+  if(state.mode==='db'){
+    var t=state.people[0]&&state.people[0].createdAt;
+    colRef.doc(id).update({createdAt:Date.now()-1e10}).catch(dbFail);
+  }else{
+    state.people=[p].concat(state.people.filter(function(x){return x.id!==id}));
+    lsSave();render();
+  }
+  toast(p.name+' 님을 나로 지정했습니다.');
+}
 function seq(list,fn){return list.reduce(function(p,x){return p.then(function(){return fn(x)})},Promise.resolve())}
 
 /* ---------- derived data ---------- */
+function refP(){
+  var r=state.people.filter(function(p){return p.id===state.refId})[0];
+  return r||state.people[0]||null;
+}
+function isMe(p){return !!p&&p===refP()}
+function loadRef(){try{state.refId=localStorage.getItem('biorhythm.ref.v1')||null}catch(e){state.refId=null}}
+function saveRef(){try{if(state.refId)localStorage.setItem('biorhythm.ref.v1',state.refId);else localStorage.removeItem('biorhythm.ref.v1')}catch(e){}}
+function renderRef(){
+  var el=$('refSel');if(!el)return;
+  if(!state.loaded||!state.people.length){el.hidden=true;return}
+  el.hidden=false;var cur=refP().id;
+  el.innerHTML='<span class="rl">기준</span><select id="refPick" aria-label="기준이 되는 사람">'+state.people.map(function(p){
+    return '<option value="'+esc(p.id)+'"'+(p.id===cur?' selected':'')+'>'+esc(p.name)+'</option>'}).join('')+'</select>';
+}
+var ME='<span class="me">나</span>';
+function nmH(p){return isMe(p)?ME:esc(p.name)}
+function nmT(p){return isMe(p)?'나':p.name}
+/* every comparison is made against the first person ("me") only */
 function pairsFor(date){
   var arr=state.people.map(function(p){return {p:p,c:calc(p.birth,date)}}).filter(function(x){return x.c});
-  var out=[],i,j,info;
-  for(i=0;i<arr.length;i++)for(j=i+1;j<arr.length;j++){
-    info=pairInfo(arr[i].c,arr[j].c);
-    if(info.lvl>0)out.push({a:arr[i].p,b:arr[j].p,ca:arr[i].c,cb:arr[j].c,info:info});
+  var out=[],j,info,me=arr.filter(function(x){return isMe(x.p)})[0];
+  if(!me)return out;
+  for(j=0;j<arr.length;j++){
+    if(arr[j]===me)continue;
+    info=pairInfo(me.c,arr[j].c);
+    if(info.lvl>0)out.push({a:me.p,b:arr[j].p,ca:me.c,cb:arr[j].c,info:info});
   }
   out.sort(function(x,y){return y.info.lvl-x.info.lvl||y.info.g-x.info.g});
   return out;
@@ -664,13 +708,17 @@ function renderSummary(){
   var el=$('summary');
   if(!state.loaded||!state.people.length){el.hidden=true;return}
   el.hidden=false;
-  var cnt={good:0,mid:0,bad:0},crit=0;
-  state.people.forEach(function(p){var c=calc(p.birth,state.date);if(!c)return;cnt[overallOf(c.mean)]++;if(c.anyCrit)crit++});
-  el.innerHTML=
-    '<span class="sm" title="종합 좋음"><i class="dot good"></i>좋음 <b>'+cnt.good+'</b></span>'+
+  var cnt={good:0,mid:0,bad:0},crit=0,mine='',mc=calc(refP().birth,state.date),nPair=pairsFor(state.date).length;
+  if(mc){var mo=overallOf(mc.mean);mine='<span class="sm mine">'+ME+' '+esc(refP().name)+' <i class="dot '+mo+'"></i>'+SL[mo]+(mc.anyCrit?' · 위험일':'')+'</span>'+
+    (state.people.length>1?'<span class="sm" title="나와 부딪칠 수 있는 사람">조심할 사람 <b>'+nPair+'</b></span>':'')}
+  else mine='<span class="sm mine">'+ME+' '+esc(refP().name)+' · 태어나기 전</span>';
+  state.people.forEach(function(p){if(isMe(p))return;var c=calc(p.birth,state.date);if(!c)return;cnt[overallOf(c.mean)]++;if(c.anyCrit)crit++});
+  if(state.people.length<2){el.innerHTML=mine;return}
+  el.innerHTML=mine+
+    '<span class="sm" title="다른 사람 종합 좋음"><i class="dot good"></i>좋음 <b>'+cnt.good+'</b></span>'+
     '<span class="sm" title="종합 보통"><i class="dot mid"></i>보통 <b>'+cnt.mid+'</b></span>'+
     '<span class="sm" title="종합 나쁨"><i class="dot bad"></i>나쁨 <b>'+cnt.bad+'</b></span>'+
-    (crit?'<span class="sm" title="위험일이 있는 사람">위험일 <b>'+crit+'</b></span>':'');
+    (crit?'<span class="sm" title="위험일이 있는 다른 사람">위험일 <b>'+crit+'</b></span>':'');
 }
 function miniLine(c){
   return ['p','e','i'].map(function(k){
@@ -683,44 +731,45 @@ function pairNote(x){
   var lowE=function(c){return c.v.e<=-0.4||c.c.e};
   var low=function(c,k){return c.v[k]<=-0.4};
   var bothE=lowE(a)&&lowE(b),bothP=low(a,'p')&&low(b,'p'),bothI=low(a,'i')&&low(b,'i');
-  var opp=(a.v.e>=0.4&&b.v.e<=-0.4)||(b.v.e>=0.4&&a.v.e<=-0.4);
+  var oppUp=a.v.e>=0.4&&b.v.e<=-0.4,oppDn=b.v.e>=0.4&&a.v.e<=-0.4;
   if(bothE){
-    if(bothP&&bothI)return {t:'모두 가라앉음',s:'큰 결정과 협의는 다른 날로 미루세요.'};
+    if(bothP&&bothI)return {t:'둘 다 가라앉음',s:'큰 결정과 협의는 다른 날로 미루세요.'};
     if(bothP)return {t:'둘 다 지치고 예민',s:'일정을 줄이고 각자 쉬세요.'};
     if(bothI)return {t:'예민 · 판단 흐림',s:'결정은 미루고 말은 짧게 하세요.'};
     return {t:'둘 다 예민',s:'말은 짧게, 협의는 다른 날로.'};
   }
-  if(opp){
-    if(bothP)return {t:'기분 차 · 함께 지침',s:'일정을 줄이고 말은 부드럽게 하세요.'};
-    if(bothI)return {t:'기분 차 · 판단 흐림',s:'결정은 미루고 말은 부드럽게 하세요.'};
-    return {t:'기분 엇갈림',s:'들뜬 쪽이 말을 낮추고 배려하세요.'};
-  }
-  if(a.c.e||b.c.e)return {t:'감성 위험일',s:'감정을 건드리는 말은 피하세요.'};
-  if(lowE(a)||lowE(b))return {t:'한쪽 예민',s:'예민한 쪽 말은 가볍게 받아 주세요.'};
+  if(oppUp)return {t:'내가 들뜨고 상대는 가라앉음',s:'내 말투와 속도를 낮추고 상대를 배려하세요.'};
+  if(oppDn)return {t:'상대는 들뜨고 나는 가라앉음',s:'상대 말에 바로 반응하지 말고 한 박자 쉬세요.'};
+  if(a.c.e)return {t:'내 감성 위험일',s:'감정이 흔들리는 날이니 대화는 짧게 하세요.'};
+  if(b.c.e)return {t:'상대 감성 위험일',s:'상대의 감정을 건드리는 말은 피하세요.'};
+  if(lowE(a))return {t:'내가 예민한 날',s:'답은 한 템포 늦추고 말은 부드럽게 하세요.'};
+  if(lowE(b))return {t:'상대가 예민한 날',s:'상대 말은 가볍게 받아 주세요.'};
   return {t:'컨디션 저하',s:'함께 하는 일은 가볍게 나누세요.'};
 }
 function renderPairs(){
   var el=$('pairs'),ct=$('ctPairs');
   if(!state.loaded){ct.textContent='';el.innerHTML='<p class="calm">불러오는 중입니다.</p>';return}
-  if(state.people.length<2){ct.textContent='';el.innerHTML='<p class="calm">조합을 비교하려면 2명 이상 등록해 주세요.</p>';return}
+  if(state.people.length<2){ct.textContent='';el.innerHTML='<p class="calm">나(첫 번째 사람)와 비교하려면 다른 사람을 1명 이상 등록해 주세요.</p>';return}
+  var me0=calc(refP().birth,state.date);
+  if(!me0){ct.textContent='';el.innerHTML='<p class="calm">'+md(state.date)+'에는 내가 아직 태어나기 전이라 계산하지 않습니다.</p>';return}
   var pr=pairsFor(state.date);
-  if(!pr.length){ct.textContent='없음';el.innerHTML='<p class="calm">'+md(state.date)+'에는 눈에 띄는 충돌 조합이 없습니다.</p>';return}
+  if(!pr.length){ct.textContent='없음';el.innerHTML='<p class="calm">'+md(state.date)+'에는 나와 부딪칠 사람이 없습니다.</p>';return}
   var hi=pr.filter(function(x){return x.info.lvl===2}).length;
-  ct.textContent=pr.length+'쌍'+(hi?' · 높음 '+hi:'');
+  ct.textContent=pr.length+'명'+(hi?' · 높음 '+hi:'');
   el.innerHTML='<div class="pairs">'+pr.map(function(x){
     var l=x.info.lvl,n=pairNote(x);
-    return '<article class="pair l'+l+'">'+
-      '<div class="phead"><span class="lvl l'+l+'">'+(l===2?'높음':'주의')+'</span><h3>'+esc(x.a.name)+' <span class="x">×</span> '+esc(x.b.name)+'</h3><span class="tag sit">'+n.t+'</span></div>'+
-      '<div class="pl"><b>'+esc(x.a.name)+'</b>'+miniLine(x.ca)+'</div>'+
+    return '<article class="pair l'+l+'"><div class="pmain">'+
+      '<div class="phead"><span class="lvl l'+l+'">'+(l===2?'높음':'주의')+'</span><h3>'+ME+' <span class="x">×</span> '+esc(x.b.name)+'</h3><span class="tag sit">'+n.t+'</span></div>'+
+      '<div class="pl"><b>'+ME+'</b>'+miniLine(x.ca)+'</div>'+
       '<div class="pl"><b>'+esc(x.b.name)+'</b>'+miniLine(x.cb)+'</div>'+
-      '<p class="ptip"><b>대처</b>'+n.s+'</p></article>';
+      '</div><aside class="ptip"><b>대처</b><span>'+n.s+'</span></aside></article>';
   }).join('')+'</div>';
 }
 function watchMap(){
   var pr=pairsFor(state.date),w={};
   pr.forEach(function(x){
     (w[x.a.id]=w[x.a.id]||[]).push({n:x.b.name,l:x.info.lvl});
-    (w[x.b.id]=w[x.b.id]||[]).push({n:x.a.name,l:x.info.lvl});
+    (w[x.b.id]=w[x.b.id]||[]).push({n:'나',l:x.info.lvl});
   });
   return w;
 }
@@ -732,10 +781,10 @@ function mcell(k,c){
 function mrowHTML(p,watch,open){
   var c=calc(p.birth,state.date),ov=c?overallOf(c.mean):'';
   var w=(watch[p.id]||[]).slice().sort(function(a,b){return b.l-a.l}),top=w.length?w[0].l:0;
-  var nm='<span class="mn2"><span class="mnm">'+(c?'<i class="dot '+ov+'" aria-hidden="true"></i>':'')+(top?'<span class="wm w'+top+'" aria-hidden="true">'+TRI+'</span>':'')+'<span class="t">'+esc(p.name)+'</span></span>';
-  var head='<button type="button" class="mrow" data-open="'+esc(p.id)+'" aria-expanded="'+open+'"';
+  var nm='<span class="mn2"><span class="mnm">'+(c?'<i class="dot '+ov+'" aria-hidden="true"></i>':'')+(top?'<span class="wm w'+top+'" aria-hidden="true">'+TRI+'</span>':'')+(isMe(p)?ME+' ':'')+'<span class="t">'+esc(p.name)+'</span></span>';
+  var head='<button type="button" class="mrow'+(isMe(p)?' isme':'')+'" data-open="'+esc(p.id)+'" aria-expanded="'+open+'"';
   if(!c)return head+' aria-label="'+esc(p.name)+', 이 날짜에는 태어나기 전">'+nm+'<span class="mov">태어나기 전</span></span><span class="mna">계산하지 않음</span></button>';
-  var label=p.name+', 종합 '+SL[ov]+(top?', 충돌 주의 '+(top===2?'높음':'주의'):'')+', '+ORDER.map(function(k){return CN[k].name+' '+fmtPct(c.v[k])+' '+SL[stateOf(c.v[k],c.c[k])]}).join(', ');
+  var label=(isMe(p)?'나, ':'')+p.name+', 종합 '+SL[ov]+(top&&!isMe(p)?', 나와 충돌 주의 '+(top===2?'높음':'주의'):(top?', 충돌 주의 '+(top===2?'높음':'주의'):''))+', '+ORDER.map(function(k){return CN[k].name+' '+fmtPct(c.v[k])+' '+SL[stateOf(c.v[k],c.c[k])]}).join(', ');
   return head+' aria-label="'+esc(label)+'">'+nm+'</span>'+
     mcell('p',c)+mcell('e',c)+mcell('i',c)+'<span aria-hidden="true"></span>'+mcell('n',c)+mcell('a',c)+mcell('s',c)+'</button>';
 }
@@ -748,7 +797,7 @@ function cardHTML(p,watch){
       '<p class="err" role="alert" hidden></p>'+
       '<div class="pact"><button class="btn primary small" type="submit">저장</button><button class="btn small" type="button" data-act="cancel">취소</button></div></form></article>';
   }
-  h+='<div class="ptop"><div class="pname"><h3>'+esc(p.name)+'</h3>'+(p.example?'<span class="tag">예시</span>':'')+'</div>';
+  h+='<div class="ptop"><div class="pname"><h3>'+esc(p.name)+'</h3>'+(isMe(p)?ME:'')+(p.example?'<span class="tag">예시</span>':'')+'</div>';
   if(c){var ov=overallOf(c.mean);h+='<span class="pill '+ov+'">종합 '+SL[ov]+'</span>'}
   h+='</div><div class="pmeta">'+birthKo(p.birth)+(c?' · 태어난 지 '+thou(c.d)+'일째':'')+'</div>';
   if(c){
@@ -757,9 +806,9 @@ function cardHTML(p,watch){
     if(icn)h+='<p class="innote">리듬 엇갈림 '+icn+'건 (위의 ‘리듬 충돌’에서 확인)</p>';
     var w=(watch[p.id]||[]).slice().sort(function(a,b){return b.l-a.l});
     if(w.length){
-      h+='<p class="watch w'+w[0].l+'">'+TRI+'<span>조심: '+w.map(function(x){return esc(x.n)+(x.l===2?' (높음)':' (주의)')}).join(', ')+'</span></p>';
+      h+='<p class="watch w'+w[0].l+'">'+TRI+'<span>'+(isMe(p)?'내가 조심할 사람: ':'나와 조심: ')+w.map(function(x){return esc(x.n)+(x.l===2?' (높음)':' (주의)')}).join(', ')+'</span></p>';
     }else{
-      h+='<p class="watch w0">이 날은 부딪칠 조합이 없습니다.</p>';
+      h+='<p class="watch w0">'+(isMe(p)?'이 날은 나와 부딪칠 사람이 없습니다.':'이 날은 나와 부딪칠 일이 없습니다.')+'</p>';
     }
   }else{
     h+='<p class="watch w0">이 날짜에는 아직 태어나기 전이라 계산하지 않습니다.</p>';
@@ -814,7 +863,7 @@ function renderChartCtl(){
     '<button type="button" data-cm="cycle" aria-pressed="'+(state.chartMode==='cycle')+'">겹쳐 보기</button></div>';
   if(state.chartMode==='person'){
     h+='<select id="chartPerson" aria-label="곡선을 볼 사람">'+state.people.map(function(p){
-      return '<option value="'+esc(p.id)+'"'+(p.id===chartPid()?' selected':'')+'>'+esc(p.name)+'</option>'}).join('')+'</select>';
+      return '<option value="'+esc(p.id)+'"'+(p.id===chartPid()?' selected':'')+'>'+(isMe(p)?'나 · ':'')+esc(p.name)+'</option>'}).join('')+'</select>';
     h+='<div class="seg" role="group" aria-label="표시할 리듬">'+[['core','기본 3'],['ext','확장 3'],['all','전체 6']].map(function(x){
       return '<button type="button" data-cs="'+x[0]+'" aria-pressed="'+(state.chartSet===x[0])+'">'+x[1]+'</button>'}).join('')+'</div>';
   }else{
@@ -826,7 +875,7 @@ function renderChartCtl(){
     h+=setKeys().map(function(k){return '<span>'+swLine('s-'+CN[k].cls,EXTK.indexOf(k)>=0?'7 4':'')+CN[k].name+' '+CN[k].P+'일</span>'}).join('');
     h+='<span><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><circle cx="6" cy="6" r="4" fill="none" stroke="currentColor" stroke-width="2"/></svg>위험일(0선을 지나는 때)</span>';
   }else{
-    h+=state.people.map(function(p,i){return '<span>'+swLine('', DASH[i%8], 'stroke:var(--pc'+(i%8)+')')+esc(p.name)+'</span>'}).join('');
+    h+=state.people.map(function(p,i){return '<span>'+swLine('', DASH[i%8], 'stroke:var(--pc'+(i%8)+')')+(isMe(p)?'나 · ':'')+esc(p.name)+'</span>'}).join('');
   }
   h+='</div>';
   el.innerHTML=h;
@@ -896,7 +945,7 @@ function drawChart(){
 }
 function renderHeat(){
   var el=$('heat'),info=$('heatInfo');
-  if(!state.loaded||!state.people.length){el.innerHTML='';$('ctHeat').textContent='';info.textContent='사람을 등록하면 앞으로 14일의 컨디션과 충돌 주의 날이 표시됩니다.';return}
+  if(!state.loaded||!state.people.length){el.innerHTML='';$('ctHeat').textContent='';info.textContent='사람을 등록하면 앞으로 14일의 컨디션과 나와 충돌하는 날이 표시됩니다.';return}
   var days=[],i;for(i=0;i<14;i++)days.push(addDays(state.date,i));
   var perDay=days.map(function(d){return pairsFor(d)});
   var best=-1,bestScore=0;
@@ -906,9 +955,9 @@ function renderHeat(){
   });
   if(best>=0){
     var pr=perDay[best],hi=pr.filter(function(x){return x.info.lvl===2}).length;
-    info.innerHTML='가장 조심할 날 <b>'+mdw(days[best])+'</b> \u00B7 높음 '+hi+'쌍, 주의 '+(pr.length-hi)+'쌍';$('ctHeat').textContent=(+days[best].slice(5,7))+'/'+(+days[best].slice(8,10))+' 조심';
+    info.innerHTML='가장 조심할 날 <b>'+mdw(days[best])+'</b> \u00B7 나와 높음 '+hi+'명, 주의 '+(pr.length-hi)+'명';$('ctHeat').textContent=(+days[best].slice(5,7))+'/'+(+days[best].slice(8,10))+' 조심';
   }else{
-    info.textContent='앞으로 14일 동안 눈에 띄는 충돌 주의 조합은 없습니다.';$('ctHeat').textContent='이상 없음';
+    info.textContent='앞으로 14일 동안 나와 부딪칠 사람은 없습니다.';$('ctHeat').textContent='이상 없음';
   }
   var h='<span></span>';
   days.forEach(function(d,idx){
@@ -916,7 +965,7 @@ function renderHeat(){
     h+='<div class="hh'+(idx===0?' sel':'')+'"><span class="mo">'+mo+'</span><span>'+WD[wdOf(d)]+'</span><span>'+(+d.slice(8,10))+'</span></div>';
   });
   state.people.forEach(function(p){
-    h+='<span class="hn" title="'+esc(p.name)+'">'+esc(p.name)+'</span>';
+    h+='<span class="hn" title="'+esc(p.name)+'">'+(isMe(p)?ME:'')+esc(p.name)+'</span>';
     days.forEach(function(d){
       var c=calc(p.birth,d);
       if(!c){h+='<span class="hc na" aria-hidden="true">·</span>';return}
@@ -925,12 +974,12 @@ function renderHeat(){
       h+='<button type="button" class="hc '+cl+'" data-date="'+d+'" aria-label="'+lab+'" title="'+lab+'">'+(c.anyCrit?'!':'')+'</button>';
     });
   });
-  h+='<span class="hlabel">충돌</span>';
+  h+='<span class="hlabel">나와 충돌</span>';
   days.forEach(function(d,idx){
     var pr=perDay[idx];
     if(!pr.length){h+='<span class="cc none" aria-hidden="true">·</span>';return}
     var hi=pr.filter(function(x){return x.info.lvl===2}).length;
-    var lab=md(d)+' 충돌 주의 '+pr.length+'쌍(높음 '+hi+'쌍)';
+    var lab=md(d)+' 나와 충돌 주의 '+pr.length+'명(높음 '+hi+'명)';
     h+='<button type="button" class="cc '+(hi?'hi':'lo')+'" data-date="'+d+'" aria-label="'+lab+'" title="'+lab+'">'+pr.length+'</button>';
   });
   el.innerHTML=h;
@@ -950,7 +999,7 @@ function renderSaveNote(){
   el.innerHTML='<b class="sv ok">저장됨</b> 이 기기 브라우저 · '+n+'명'+t+'. 브라우저 데이터를 지우면 사라지니 백업을 따로 보관하세요.';
 }
 function render(){
-  renderDate();renderSummary();renderPairs();renderClash();renderBoard();renderChartCtl();drawChart();renderHeat();renderSaveNote();
+  renderDate();renderRef();renderSummary();renderPairs();renderClash();renderBoard();renderChartCtl();drawChart();renderHeat();renderSaveNote();
   if(state.loaded&&!state.people.length&&!state.addOpened){state.addOpened=true;$('secAdd').open=true}
 }
 
@@ -959,7 +1008,9 @@ function clashData(date){
   var arr=state.people.map(function(p){return {p:p,c:calc(p.birth,date)}}).filter(function(x){return x.c});
   var between={},inner=[],nb=0,ni=0,i,j;
   ORDER.forEach(function(k){between[k]=[]});
-  for(i=0;i<arr.length;i++)for(j=i+1;j<arr.length;j++){
+  var meI=-1;arr.forEach(function(x,n){if(isMe(x.p))meI=n});
+  for(i=meI;i>=0&&i===meI;i++)for(j=0;j<arr.length;j++){
+    if(j===meI)continue;
     (function(A,B){
       ORDER.forEach(function(k){
         var l=rhythmClash(A.c,B.c,k);
@@ -972,44 +1023,44 @@ function clashData(date){
     })(arr[i],arr[j]);
   }
   ORDER.forEach(function(k){between[k].sort(function(x,y){return y.gap-x.gap})});
-  arr.forEach(function(x){var l=innerClash(x.c);if(l.length){inner.push({p:x.p,c:x.c,list:l});ni+=l.length}});
+  arr.forEach(function(x){if(!isMe(x.p))return;var l=innerClash(x.c);if(l.length){inner.push({p:x.p,c:x.c,list:l});ni+=l.length}});
   inner.sort(function(x,y){return y.list.length-x.list.length||y.list[0].gap-x.list[0].gap});
   return {between:between,inner:inner,nb:nb,ni:ni};
 }
 function clashSummary(){
   var d=clashData(state.date);
-  return '<span class="sm">리듬 충돌 <b>'+d.nb+'</b>건(사람 사이) · <b>'+d.ni+'</b>건(한 사람 안)</span>';
+  return '<span class="sm">리듬 충돌 <b>'+d.nb+'</b>건(나와 상대) · <b>'+d.ni+'</b>건(내 안)</span>';
 }
 function renderClash(){
   var ctl=$('clashCtl'),el=$('clash'),ct=$('ctClash');
   if(!state.loaded||state.people.length<1){
     ct.textContent='';ctl.innerHTML='';
-    el.innerHTML='<p class="calm">'+(state.loaded?'사람을 등록하면 리듬 충돌이 표시됩니다.':'불러오는 중입니다.')+'</p>';
+    el.innerHTML='<p class="calm">'+(state.loaded?'첫 번째 사람(나)을 등록하면 리듬 충돌이 표시됩니다.':'불러오는 중입니다.')+'</p>';
     return;
   }
   var d=clashData(state.date),h;
   ct.textContent=d.nb+' · '+d.ni+'건';
   ctl.innerHTML='<div class="ctl"><div class="seg" role="group" aria-label="충돌 종류">'+
-    '<button type="button" data-km="between" aria-pressed="'+(state.clashMode==='between')+'">사람 사이 '+d.nb+'</button>'+
-    '<button type="button" data-km="inner" aria-pressed="'+(state.clashMode==='inner')+'">한 사람 안 '+d.ni+'</button></div></div>';
+    '<button type="button" data-km="between" aria-pressed="'+(state.clashMode==='between')+'">나와 상대 '+d.nb+'</button>'+
+    '<button type="button" data-km="inner" aria-pressed="'+(state.clashMode==='inner')+'">내 안 '+d.ni+'</button></div></div>';
   if(state.clashMode==='between'){
-    if(state.people.length<2){el.innerHTML='<p class="calm">사람 사이 충돌을 보려면 2명 이상 등록해 주세요.</p>';return}
-    if(!d.nb){el.innerHTML='<p class="calm">'+md(state.date)+'에는 한쪽이 크게 오르고 다른 쪽이 크게 내려간 리듬이 없습니다.</p>';return}
+    if(state.people.length<2){el.innerHTML='<p class="calm">나와 상대의 리듬 충돌을 보려면 다른 사람을 1명 이상 등록해 주세요.</p>';return}
+    if(!d.nb){el.innerHTML='<p class="calm">'+md(state.date)+'에는 나와 상대가 서로 크게 반대로 움직이는 리듬이 없습니다.</p>';return}
     h='<div class="clgrid">';
     ORDER.forEach(function(k){
       var L=d.between[k];
       if(!L.length)return;
-      h+='<article class="cgrp"><div class="cgh"><i class="rdot rd-'+CN[k].cls+'"></i><h3 title="'+esc(MEAN[k])+'">'+CN[k].name+' 리듬</h3><span class="tag">'+(EXTK.indexOf(k)<0?'기본':'확장')+'</span><span class="cgc">'+L.length+'쌍</span></div>'+
+      h+='<article class="cgrp"><div class="cgh"><i class="rdot rd-'+CN[k].cls+'"></i><h3 title="'+esc(MEAN[k])+'">'+CN[k].name+' 리듬</h3><span class="tag">'+(EXTK.indexOf(k)<0?'기본':'확장')+'</span><span class="cgc">'+L.length+'명</span></div>'+
         '<ul class="cls">'+
         L.slice(0,3).map(function(r){
-          return '<li class="cl"><b class="chip good">'+esc(r.good.name)+' '+fmtPct(r.gv)+'</b><span class="x">↔</span><b class="chip bad">'+esc(r.bad.name)+' '+fmtPct(r.bv)+'</b><span class="lvl l'+r.lvl+'">'+(r.lvl===2?'강함':'주의')+'</span></li>';
-        }).join('')+'</ul>'+(L.length>3?'<p class="cgm">외 '+(L.length-3)+'쌍</p>':'')+'</article>';
+          return '<li class="cl"><b class="chip good">'+(isMe(r.good)?'나':esc(r.good.name))+' '+fmtPct(r.gv)+'</b><span class="x">↔</span><b class="chip bad">'+(isMe(r.bad)?'나':esc(r.bad.name))+' '+fmtPct(r.bv)+'</b><span class="lvl l'+r.lvl+'">'+(r.lvl===2?'강함':'주의')+'</span></li>';
+        }).join('')+'</ul>'+(L.length>3?'<p class="cgm">외 '+(L.length-3)+'명</p>':'')+'</article>';
     });
     el.innerHTML=h+'</div>';
   }else{
-    if(!d.ni){el.innerHTML='<p class="calm">'+md(state.date)+'에는 한 사람 안에서 서로 반대로 움직이는 리듬이 없습니다.</p>';return}
+    if(!d.ni){el.innerHTML='<p class="calm">'+md(state.date)+'에는 내 안에서 서로 반대로 움직이는 리듬이 없습니다.</p>';return}
     el.innerHTML='<div class="clgrid">'+d.inner.map(function(x){
-      return '<article class="cgrp"><div class="cgh"><h3>'+esc(x.p.name)+'</h3><span class="cgc">'+x.list.length+'건</span></div><ul class="cls">'+
+      return '<article class="cgrp"><div class="cgh"><h3>'+ME+' '+esc(x.p.name)+'</h3><span class="cgc">'+x.list.length+'건</span></div><ul class="cls">'+
         x.list.slice(0,2).map(function(r,ri){
           return '<li class="cl"><b class="chip good">'+CN[r.hi].name+' '+fmtPct(x.c.v[r.hi])+'</b><span class="x">↔</span><b class="chip bad">'+CN[r.lo].name+' '+fmtPct(x.c.v[r.lo])+'</b>'+
             '<span class="lvl l'+(r.gap>=1.5?2:1)+'">'+(r.gap>=1.5?'강함':'주의')+'</span>'+(ri===0?'<span class="rm">'+(INNER[r.hi+r.lo]||'서로 반대로 움직이는 날입니다.')+'</span>':'')+'</li>';
@@ -1097,6 +1148,7 @@ document.addEventListener('click',function(e){
     if(act){
       var card=b.closest('.pcard'),id=card&&card.getAttribute('data-id');
       if(act==='edit'){state.editId=id;state.delId=null;state.focusEdit=true;renderBoard()}
+      else if(act==='me'){setMe(id)}
       else if(act==='cancel'){state.editId=null;renderBoard()}
       else if(act==='del'){state.delId=id;renderBoard()}
       else if(act==='delno'){state.delId=null;renderBoard()}
@@ -1134,6 +1186,7 @@ document.addEventListener('click',function(e){
   if(hit){setDate(addDays(state.date,+hit.getAttribute('data-t')))}
 });
 document.addEventListener('change',function(e){
+  if(e.target&&e.target.id==='refPick'){state.refId=e.target.value;saveRef();state.delId=null;render();return}
   if(e.target&&e.target.id==='chartPerson'){state.chartPerson=e.target.value;renderBoard();drawChart()}
 });
 $('expBtn').addEventListener('click',function(){
@@ -1189,6 +1242,7 @@ window.addEventListener('resize',function(){
   if(ai&&ai.href)$('logo').src=ai.href;
 })();
 
+loadRef();
 $('addBirthBox').innerHTML=ymdInner('addBirth','');
 render();
 initStore();
